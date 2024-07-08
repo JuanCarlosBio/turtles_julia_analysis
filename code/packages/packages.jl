@@ -10,6 +10,9 @@ packages = [
   "IterTools",
   "Gadfly",
   "Cairo",
+  "CategoricalArrays",
+  "HypothesisTests",
+  "RCall"
   ]
 
 import Pkg

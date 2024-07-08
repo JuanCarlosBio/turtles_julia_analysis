@@ -6,8 +6,16 @@ using
   DataFramesMeta,
   CategoricalArrays,
   Gadfly,
-  Cairo
+  Cairo,
+  RCall
 
+## Librerías de R
+R"""
+suppressMessages({
+  library(tidyverse)
+  library(glue)
+})
+"""
 ##==================##
 ## Loading the data ##
 ##==================##
@@ -77,29 +85,40 @@ df_summary_joined[!, :n] = ifelse.(
  
 df_turtles_per_year = combine(groupby(df_summary_joined, [:year]), :n => sum)
 
-## Barplot of the turtles arrival every year
-bar_plot = plot(
-  layer(
-    df_turtles_per_year,
-    x = :year,
-    y = :n_sum,
-    Geom.bar
-  ),
-  Scale.x_discrete,
-  Guide.title("Rescue turtles per year"),
-  Guide.xlabel("Year"),
-  Guide.ylabel("Number of turtles"),
-  Theme(
-    bar_highlight=color("black"),
-    background_color = "white",
-    panel_fill = "white",
-    panel_stroke = "black",
-    grid_color= "transparent",
-    minor_label_color = "black",
-    major_label_color = "black",
-    key_position = :top
-  )
-)
+## Using R, remember installing the packages
+R"""
+df_turtles_per_yearR <- $df_turtles_per_year
+
+df_turtles_per_yearR %>% 
+  ggplot(aes(year, n_sum)) +
+  geom_bar(stat = "identity", position = position_stack(),
+           alpha = .8, width = .5) +
+  scale_fill_manual(values = c("red4","red3","red","gray35","gray55",
+                               "gray","blue4","blue",
+                               "skyblue","yellow4","yellowgreen","yellow")) +
+  labs(
+    title = "Turtles arrival every year",
+    x = "Year",
+    y = "Num.turtles",
+    fill = NULL) +
+  scale_y_continuous(expand = expansion(0),
+                     limits = c(0,100)) +
+  theme(
+        #panel.background = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_rect(fill = "white", color = "white"),
+        #plot.background = element_rect(fill = "lightblue", color = "lightblue"),
+        axis.line.x  = element_line(),
+        title = element_text(size = 11, face = "bold"),
+        plot.title = element_text(margin = margin(b = 1, unit = "lines"), hjust = .5),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(angle = 270, hjust = 1, vjust = .5),
+        axis.title.x = element_blank(),
+        axis.title.y = element_text(margin = margin(r = 10), size = 13),
+        axis.text = element_text(size = 10.5),
+        plot.caption =  element_text(hjust = 0, face = "italic")) 
+
+"""
 
 df_summary_joined[!, :year] = parse.(Int, df_summary_joined.year)
 
@@ -139,7 +158,40 @@ if !isdir(images_dir) mkdir(images_dir) end
 draw(PNG("$images_dir/rescue_years.png", 25cm, 15cm), bar_plot)
 draw(PNG("$images_dir/rescue_years_seasons.png", 25cm, 15cm), line_plot)
 
+
 ##======================##
 ## Statistical Analysis ##
 ##======================##
+
+# plotting the distribution of the data
+
+function hist_plot(season::String)
+  hist = plot(
+    layer(
+      filter(row -> row.season == season,df_summary_joined),
+      x = :n,
+      Geom.histogram
+    ),
+    Guide.title("Distribution data $season"),
+    Guide.xlabel("Number of turtles"),
+    Guide.ylabel("Count"),
+  Theme(
+    bar_highlight=color("black"),
+    background_color = "white",
+    panel_fill = "white",
+    panel_stroke = "black",
+    grid_color= "transparent",
+    minor_label_color = "black",
+    major_label_color = "black",
+    key_position = :top
+    )
+  )
+  return hist
+end
+
+vstack(
+  hstack(hist_plot("Fall"), hist_plot("Spring")),
+  hstack(hist_plot("Winter"), hist_plot("Summer"))
+  )
+
 
