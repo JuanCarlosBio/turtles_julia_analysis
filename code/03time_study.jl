@@ -7,13 +7,16 @@ using
   CategoricalArrays,
   Gadfly,
   Cairo,
-  RCall
+  RCall,
+  HypothesisTests
 
 ## Librerías de R
 R"""
 suppressMessages({
   library(tidyverse)
   library(glue)
+  library(ggtext)
+  library(rstatix)
 })
 """
 ##==================##
@@ -84,6 +87,7 @@ df_summary_joined[!, :n] = ifelse.(
 ##======================##
  
 df_turtles_per_year = combine(groupby(df_summary_joined, [:year]), :n => sum)
+max_f_turtles_per_year = maximum(df_turtles_per_year.n_sum)
 
 ## Using R, remember installing the packages
 R"""
@@ -93,6 +97,12 @@ df_turtles_per_yearR %>%
   ggplot(aes(year, n_sum)) +
   geom_bar(stat = "identity", position = position_stack(),
            alpha = .8, width = .5) +
+  geom_text(aes(year, n_sum, label = n_sum),
+            position = "identity",
+            color = "black",
+            fontface = "bold",
+            show.legend = F,
+            vjust = -.5) +
   scale_fill_manual(values = c("red4","red3","red","gray35","gray55",
                                "gray","blue4","blue",
                                "skyblue","yellow4","yellowgreen","yellow")) +
@@ -102,7 +112,8 @@ df_turtles_per_yearR %>%
     y = "Num.turtles",
     fill = NULL) +
   scale_y_continuous(expand = expansion(0),
-                     limits = c(0,100)) +
+                     ## This way it would be easier to reuse in the futures
+                     limits = c(0, $max_f_turtles_per_year + $max_f_turtles_per_year * .2)) +
   theme(
         #panel.background = element_blank(),
         panel.grid = element_blank(),
@@ -122,76 +133,108 @@ df_turtles_per_yearR %>%
 
 df_summary_joined[!, :year] = parse.(Int, df_summary_joined.year)
 
-## Line plot for season arrival
-line_plot = plot(
-  layer(
-    df_summary_joined,
-    x = :year,
-    y = :n,
-    color = :season,
-    Geom.line
-  ),
-  Guide.title("Rescue turtles per year over the seasons"),
-  Guide.xlabel("Year"),
-  Guide.ylabel("Number of turtles"),
-  Guide.colorkey(title = "Season"),
-  Scale.color_discrete_manual(["#28bad7","#c7cd32", "#bc33cc", "#d88a27"]..., order=[4,2,3,1]),
-  Coord.cartesian(
-    xmin = minimum(df_summary_joined.year), 
-    xmax = maximum(df_summary_joined.year) + 1
-    ),
-  Theme(
-    background_color = "white",
-    panel_fill = "white",
-    panel_stroke = "black",
-#    grid_color= "transparent",
-    minor_label_color = "black",
-    major_label_color = "black",
-    key_position = :top
-  )
-)
+R"""
+df_summary_joinedR <- $df_summary_joined 
 
-## Saving the images
-images_dir = "data/images/" 
-if !isdir(images_dir) mkdir(images_dir) end
-
-draw(PNG("$images_dir/rescue_years.png", 25cm, 15cm), bar_plot)
-draw(PNG("$images_dir/rescue_years_seasons.png", 25cm, 15cm), line_plot)
-
+df_summary_joinedR %>%
+  ggplot(aes(year, n, col = season, group = season)) +
+  geom_point(size = 2) +
+  geom_line(size = .75) +
+  scale_color_manual(
+    breaks  = c("Spring","Summer","Fall","Winter"),
+    values = c("yellowgreen","darkmagenta","orangered", "cyan3")
+    ) +
+  labs(title = "Arrival according to season and year",
+       x = "Year",
+       y = "Num.turtles",
+       col="Season") +
+  theme_classic() +
+  theme(title = element_markdown(size = 12, face = "bold"),
+        panel.grid = element_blank(),
+        #panel.background = element_rect(fill = "white", color = "azure"),
+        #plot.background = element_rect(fill = "lightblue", color = "lightblue"),
+        plot.title = element_markdown(margin = margin(b = 1, unit = "lines"),
+                                      hjust = .5),
+        axis.text = element_text(size = 10.5),
+        #axis.ticks.x = element_blank(),
+        axis.text.x = element_markdown(angle = 270, vjust = .4),
+        axis.title.x = element_text(margin = margin(t = 10),size = 13),
+        axis.title.y = element_text(margin = margin(r = 10), size = 13),
+        plot.caption =  element_markdown(hjust = 0, face = "italic"),
+        legend.background =  element_rect(fill = "white"),
+        #legend.key = element_rect(fill = "white"),
+        legend.position = "top")
+"""
 
 ##======================##
 ## Statistical Analysis ##
 ##======================##
 
 # plotting the distribution of the data
+R"""
+df_summary_joinedR %>%
+  mutate(
+    estacion=factor(
+      season, 
+      levels=c("Spring","Summer","Fall","Winter")
+      )) %>% 
+  ggplot(aes(n,fill=season)) +
+  geom_histogram(bins = 25,col="black", show.legend = F) +
+  facet_wrap(~season, ncol=2) +
+  labs(
+    title = "Distribution of the data",
+    x= "Num.turtles",
+    y = "Frecuency",
+    subtitle = ""
+  ) +
+  scale_fill_manual(breaks = c("Spring", "Summer", "Fall", "Winter"),
+                    values = c("yellowgreen","darkmagenta","orangered",
+                               "cyan3")) +
+  scale_y_continuous(expand = expansion(0)) +
+  theme_test() +
+  theme(plot.title = element_text(size = 13,
+                                  #margin = margin(b=1, unit = "lines"),
+                                  face = "bold",
+                                  hjust = .5),
+        panel.grid = element_blank(),
+        panel.background = element_rect(fill = "white", color = "white"),
+        plot.subtitle  =element_text(size = 9),
+        axis.title = element_text(face = "bold", size = 13),
+        axis.title.x = element_text(margin = margin(t=10)),
+        axis.title.y = element_text(margin = margin(r=10)),
+        strip.background = element_blank(),
+        strip.text = element_markdown(face = "bold"))
+"""
 
-function hist_plot(season::String)
-  hist = plot(
-    layer(
-      filter(row -> row.season == season,df_summary_joined),
-      x = :n,
-      Geom.histogram
-    ),
-    Guide.title("Distribution data $season"),
-    Guide.xlabel("Number of turtles"),
-    Guide.ylabel("Count"),
-  Theme(
-    bar_highlight=color("black"),
-    background_color = "white",
-    panel_fill = "white",
-    panel_stroke = "black",
-    grid_color= "transparent",
-    minor_label_color = "black",
-    major_label_color = "black",
-    key_position = :top
+## Also doing a shapiro test to be sure that the data is indeed not normal
+## there is not a shapiro-wilks function in Julia easily available :/
+R"tapply(df_summary_joinedR$n, df_summary_joinedR$season, shapiro.test)"
+R"shapiro.test(df_summary_joinedR$n)"
+
+## Becouse the data is not normal we will use a Kruskall-Wallis Test
+function filter_season(df::DataFrame, season::String) 
+  filter(
+    row -> row.season == season, df
     )
-  )
-  return hist
 end
 
-vstack(
-  hstack(hist_plot("Fall"), hist_plot("Spring")),
-  hstack(hist_plot("Winter"), hist_plot("Summer"))
-  )
+rcopy(
+  R"""
+  df_summary_joinedR %>%
+    kruskal_test(n~season)
+  """)
 
+rcopy(
+  R"""
+  df_summary_joinedR %>%
+    dunn_test(n~season, p.adjust = "bonf")
+  """
+)
 
+R"""
+df_summary_joinedR %>%
+  ggplot(aes(season, n, fill = season)) +
+    geom_jitter(pch = 21, position = position_jitterdodge(.5, seed = 20101997),
+                alpha = .8,show.legend = F) +
+    geom_boxplot(alpha=.5,width=.5,show.legend = F)
+"""
