@@ -5,8 +5,6 @@ using
   DataFrames,
   DataFramesMeta,
   CategoricalArrays,
-  Gadfly,
-  Cairo,
   RCall,
   HypothesisTests
 

@@ -38,7 +38,7 @@ function main()
 
   ## Params to transform ISO-8859-1 to UTF-8 
   input_file::String           = "data/raw/stranding_turtles.csv"
-  out_dir::String = "data/processed/"
+  out_dir::String              = "data/processed/"
   output_file::String          = "data/processed/stranding_turtles_processed.csv" 
   original_encoding::String    = "ISO-8859-1"
   transformed_encoding::String = "UTF-8"

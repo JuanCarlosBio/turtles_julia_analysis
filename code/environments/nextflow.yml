@@ -1,0 +1,19 @@
+name: nextflow_marine_turtles
+
+channels:
+  - conda-forge
+  - anaconda
+  - r
+  - bioconda
+
+dependencies:
+  - python
+  - nextflow
+  - julia
+  - r-base
+  - r-tidyverse
+  - r-glue
+  - r-ggtext
+  - r-rstatix
+  - bash
+  - coreutils

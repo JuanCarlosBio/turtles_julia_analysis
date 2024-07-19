@@ -1,5 +1,7 @@
 #!/usr/bin/env julia
 
+println("Download/Update Packages")
+
 ## Installing the Julia packages for the analysis
 packages = [
   "HTTP", 
@@ -8,12 +10,13 @@ packages = [
   "DataFrames",
   "DataFramesMeta",
   "IterTools",
-  "Gadfly",
-  "Cairo",
   "CategoricalArrays",
   "HypothesisTests",
-  "RCall"
+  "RCall",
+  "MultivariateStats"
   ]
 
 import Pkg
 Pkg.add(packages)
+
+println("Job finished")
