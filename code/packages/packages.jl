@@ -13,7 +13,8 @@ packages = [
   "CategoricalArrays",
   "HypothesisTests",
   "RCall",
-  "MultivariateStats"
+  "MultivariateStats",
+  "PooledArrays"
   ]
 
 import Pkg

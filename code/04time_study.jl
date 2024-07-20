@@ -91,7 +91,7 @@ max_f_turtles_per_year = maximum(df_turtles_per_year.n_sum)
 R"""
 df_turtles_per_yearR <- $df_turtles_per_year
 
-df_turtles_per_yearR %>% 
+bar_plot_years <- df_turtles_per_yearR %>% 
   ggplot(aes(year, n_sum)) +
   geom_bar(stat = "identity", position = position_stack(),
            alpha = .8, width = .5) +
@@ -105,28 +105,35 @@ df_turtles_per_yearR %>%
                                "gray","blue4","blue",
                                "skyblue","yellow4","yellowgreen","yellow")) +
   labs(
-    title = "Turtles arrival every year",
+    title = "Stranded turtles every year in Tenerife (CRFS La Tahonilla)",
     x = "Year",
-    y = "Num.turtles",
+    y = "Number turtles",
     fill = NULL) +
   scale_y_continuous(expand = expansion(0),
                      ## This way it would be easier to reuse in the futures
                      limits = c(0, $max_f_turtles_per_year + $max_f_turtles_per_year * .2)) +
   theme(
-        #panel.background = element_blank(),
-        panel.grid = element_blank(),
-        panel.background = element_rect(fill = "white", color = "white"),
-        #plot.background = element_rect(fill = "lightblue", color = "lightblue"),
-        axis.line.x  = element_line(),
-        title = element_text(size = 11, face = "bold"),
-        plot.title = element_text(margin = margin(b = 1, unit = "lines"), hjust = .5),
-        axis.ticks.x = element_blank(),
-        axis.text.x = element_text(angle = 270, hjust = 1, vjust = .5),
-        axis.title.x = element_blank(),
-        axis.title.y = element_text(margin = margin(r = 10), size = 13),
-        axis.text = element_text(size = 10.5),
-        plot.caption =  element_text(hjust = 0, face = "italic")) 
+    #panel.background = element_blank(),
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = "white", color = "white"),
+    #plot.background = element_rect(fill = "lightblue", color = "lightblue"),
+    axis.line.x  = element_line(),
+    title = element_text(size = 11, face = "bold"),
+    plot.title = element_text(margin = margin(b = 1, unit = "lines"), hjust = .5),
+    axis.ticks.x = element_blank(),
+    axis.text.x = element_text(angle = 270, hjust = 1, vjust = .5),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(margin = margin(r = 10), size = 13),
+    axis.text = element_text(size = 10.5),
+    plot.caption =  element_text(hjust = 0, face = "italic")
+  ) 
 
+ggsave(
+  filename = "images/figures/number_turtles_per_year.png", 
+  plot = bar_plot_years,
+  width = 7,
+  height = 5
+  )
 """
 
 df_summary_joined[!, :year] = parse.(Int, df_summary_joined.year)
@@ -134,7 +141,7 @@ df_summary_joined[!, :year] = parse.(Int, df_summary_joined.year)
 R"""
 df_summary_joinedR <- $df_summary_joined 
 
-df_summary_joinedR %>%
+line_plot_seasons <- df_summary_joinedR %>%
   ggplot(aes(year, n, col = season, group = season)) +
   geom_point(size = 2) +
   geom_line(size = .75) +
@@ -142,26 +149,35 @@ df_summary_joinedR %>%
     breaks  = c("Spring","Summer","Fall","Winter"),
     values = c("yellowgreen","darkmagenta","orangered", "cyan3")
     ) +
-  labs(title = "Arrival according to season and year",
+  labs(title = "Stranded turtles per season and year in Tenerife (CRFS La Tahonilla)",
        x = "Year",
-       y = "Num.turtles",
+       y = "Number of turtles",
        col="Season") +
   theme_classic() +
-  theme(title = element_markdown(size = 12, face = "bold"),
-        panel.grid = element_blank(),
-        #panel.background = element_rect(fill = "white", color = "azure"),
-        #plot.background = element_rect(fill = "lightblue", color = "lightblue"),
-        plot.title = element_markdown(margin = margin(b = 1, unit = "lines"),
-                                      hjust = .5),
-        axis.text = element_text(size = 10.5),
-        #axis.ticks.x = element_blank(),
-        axis.text.x = element_markdown(angle = 270, vjust = .4),
-        axis.title.x = element_text(margin = margin(t = 10),size = 13),
-        axis.title.y = element_text(margin = margin(r = 10), size = 13),
-        plot.caption =  element_markdown(hjust = 0, face = "italic"),
-        legend.background =  element_rect(fill = "white"),
-        #legend.key = element_rect(fill = "white"),
-        legend.position = "top")
+  theme(
+    title = element_markdown(size = 12, face = "bold"),
+    panel.grid = element_blank(),
+    #panel.background = element_rect(fill = "white", color = "azure"),
+    #plot.background = element_rect(fill = "lightblue", color = "lightblue"),
+    plot.title = element_markdown(margin = margin(b = 1, unit = "lines"),
+                                  hjust = .5),
+    axis.text = element_text(size = 10.5),
+    #axis.ticks.x = element_blank(),
+    axis.text.x = element_markdown(angle = 270, vjust = .4),
+    axis.title.x = element_text(margin = margin(t = 10),size = 13),
+    axis.title.y = element_text(margin = margin(r = 10), size = 13),
+    plot.caption =  element_markdown(hjust = 0, face = "italic"),
+    legend.background =  element_rect(fill = "white"),
+    #legend.key = element_rect(fill = "white"),
+    legend.position = "top"
+  )
+
+ggsave(
+  filename = "images/figures/number_turtles_per_season.png", 
+  plot = line_plot_seasons,
+  width = 8,
+  height = 5
+  )
 """
 
 ##======================##
@@ -170,7 +186,7 @@ df_summary_joinedR %>%
 
 # plotting the distribution of the data
 R"""
-df_summary_joinedR %>%
+hist_data_seasons <- df_summary_joinedR %>%
   mutate(
     estacion=factor(
       season, 
@@ -181,7 +197,7 @@ df_summary_joinedR %>%
   facet_wrap(~season, ncol=2) +
   labs(
     title = "Distribution of the data",
-    x= "Num.turtles",
+    x= "Number of turtles",
     y = "Frecuency",
     subtitle = ""
   ) +
@@ -190,18 +206,27 @@ df_summary_joinedR %>%
                                "cyan3")) +
   scale_y_continuous(expand = expansion(0)) +
   theme_test() +
-  theme(plot.title = element_text(size = 13,
-                                  #margin = margin(b=1, unit = "lines"),
-                                  face = "bold",
-                                  hjust = .5),
-        panel.grid = element_blank(),
-        panel.background = element_rect(fill = "white", color = "white"),
-        plot.subtitle  =element_text(size = 9),
-        axis.title = element_text(face = "bold", size = 13),
-        axis.title.x = element_text(margin = margin(t=10)),
-        axis.title.y = element_text(margin = margin(r=10)),
-        strip.background = element_blank(),
-        strip.text = element_markdown(face = "bold"))
+  theme(
+    plot.title = element_text(size = 13,
+                             #margin = margin(b=1, unit = "lines"),
+                             face = "bold",
+                             hjust = .5),
+   panel.grid = element_blank(),
+   panel.background = element_rect(fill = "white", color = "white"),
+   plot.subtitle = element_text(size = 9),
+   axis.title = element_text(face = "bold", size = 13),
+   axis.title.x = element_text(margin = margin(t=10)),
+   axis.title.y = element_text(margin = margin(r=10)),
+   strip.background = element_blank(),
+   strip.text = element_markdown(face = "bold")
+  )
+
+ggsave(
+  filename = "images/figures/histogram_season_data.png", 
+  plot = hist_data_seasons,
+  width = 7,
+  height = 5
+  )
 """
 
 ## Also doing a shapiro test to be sure that the data is indeed not normal
@@ -222,17 +247,26 @@ rcopy(
     kruskal_test(n~season)
   """)
 
-rcopy(
+dunn_test_results = rcopy(
   R"""
   df_summary_joinedR %>%
     dunn_test(n~season, p.adjust = "bonf")
   """
 )
 
+CSV.write("data/statistics/dunn_test_seasons.csv", dunn_test_results) 
+
 R"""
-df_summary_joinedR %>%
+boxplot_seasons <- df_summary_joinedR %>%
   ggplot(aes(season, n, fill = season)) +
     geom_jitter(pch = 21, position = position_jitterdodge(.5, seed = 20101997),
                 alpha = .8,show.legend = F) +
     geom_boxplot(alpha=.5,width=.5,show.legend = F)
+
+ggsave(
+  filename = "images/figures/boxplot_seasons.png", 
+  plot = boxplot_seasons,
+  width = 7,
+  height = 5
+)
 """
