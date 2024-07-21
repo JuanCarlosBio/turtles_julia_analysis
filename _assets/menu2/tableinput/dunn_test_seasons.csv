@@ -1,7 +1,0 @@
-Grupo1,Grupo2,Estadístico,p,p ajustado,Significativo
-Fall,Spring,1.2325,0.2178,1.0,ns
-Fall,Summer,4.1792,0.0,0.0002,***
-Fall,Winter,-2.1487,0.0317,0.1899,ns
-Spring,Summer,2.9467,0.0032,0.0193,*
-Spring,Winter,-3.3812,0.0007,0.0043,**
-Summer,Winter,-6.3279,0.0,0.0,****
