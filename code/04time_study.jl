@@ -129,7 +129,7 @@ bar_plot_years <- df_turtles_per_yearR %>%
   ) 
 
 ggsave(
-  filename = "turtles_julia_analysis/_assets/figures/plots/number_turtles_per_year.png", 
+  filename = "./_assets/figures/plots/number_turtles_per_year.png", 
   plot = bar_plot_years,
   width = 7,
   height = 5
@@ -174,7 +174,7 @@ line_plot_seasons <- df_summary_joinedR %>%
   )
 
 ggsave(
-  filename = "turtles_julia_analysis/_assets/figures/plots/number_turtles_per_season.png", 
+  filename = "./_assets/figures/plots/number_turtles_per_season.png", 
   plot = line_plot_seasons,
   width = 8,
   height = 5
@@ -223,7 +223,7 @@ hist_data_seasons <- df_summary_joinedR %>%
   )
 
 ggsave(
-  filename = "turtles_julia_analysis/_assets/figures/plots/histogram_season_data.png", 
+  filename = "./_assets/figures/plots/histogram_season_data.png", 
   plot = hist_data_seasons,
   width = 7,
   height = 5
@@ -264,7 +264,7 @@ dunn_test_results = rcopy(
 )[:,[2,3,6,7,8,9]]
 
 
-CSV.write("turtles_julia_analysis/_assets/menu2/tableinput/dunn_test_seasons.csv", dunn_test_results) 
+CSV.write("./_assets/menu2/tableinput/dunn_test_seasons.csv", dunn_test_results) 
 
 R"""
 boxplot_seasons <- df_summary_joinedR %>%
@@ -274,7 +274,7 @@ boxplot_seasons <- df_summary_joinedR %>%
     geom_boxplot(alpha=.5,width=.5,show.legend = F)
 
 ggsave(
-  filename = "turtles_julia_analysis/_assets/figures/plots/boxplot_seasons.png", 
+  filename = "./_assets/figures/plots/boxplot_seasons.png", 
   plot = boxplot_seasons,
   width = 7,
   height = 5
