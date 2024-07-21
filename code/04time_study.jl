@@ -105,9 +105,9 @@ bar_plot_years <- df_turtles_per_yearR %>%
                                "gray","blue4","blue",
                                "skyblue","yellow4","yellowgreen","yellow")) +
   labs(
-    title = "Stranded turtles every year in Tenerife (CRFS La Tahonilla)",
-    x = "Year",
-    y = "Number turtles",
+    title = "Tortugas marinas varadas en el tiempo en Tenerife (2000-2021)",
+    x = "Año",
+    y = "Número de tortugas",
     fill = NULL) +
   scale_y_continuous(expand = expansion(0),
                      ## This way it would be easier to reuse in the futures
@@ -129,7 +129,7 @@ bar_plot_years <- df_turtles_per_yearR %>%
   ) 
 
 ggsave(
-  filename = "images/figures/number_turtles_per_year.png", 
+  filename = "turtles_julia_analysis/_assets/figures/plots/number_turtles_per_year.png", 
   plot = bar_plot_years,
   width = 7,
   height = 5
@@ -147,12 +147,13 @@ line_plot_seasons <- df_summary_joinedR %>%
   geom_line(size = .75) +
   scale_color_manual(
     breaks  = c("Spring","Summer","Fall","Winter"),
-    values = c("yellowgreen","darkmagenta","orangered", "cyan3")
+    values = c("yellowgreen","darkmagenta","orangered", "cyan3"),
+    labels = c("Primavera", "Verano", "Otoño", "Invierno")
     ) +
-  labs(title = "Stranded turtles per season and year in Tenerife (CRFS La Tahonilla)",
-       x = "Year",
-       y = "Number of turtles",
-       col="Season") +
+  labs(title = "Tortugas marinas varadas según la estación en Tenerife (2000-2021)",
+       x = "Año",
+       y = "Número de tortugas",
+       col="Estación") +
   theme_classic() +
   theme(
     title = element_markdown(size = 12, face = "bold"),
@@ -173,7 +174,7 @@ line_plot_seasons <- df_summary_joinedR %>%
   )
 
 ggsave(
-  filename = "images/figures/number_turtles_per_season.png", 
+  filename = "turtles_julia_analysis/_assets/figures/plots/number_turtles_per_season.png", 
   plot = line_plot_seasons,
   width = 8,
   height = 5
@@ -222,7 +223,7 @@ hist_data_seasons <- df_summary_joinedR %>%
   )
 
 ggsave(
-  filename = "images/figures/histogram_season_data.png", 
+  filename = "turtles_julia_analysis/_assets/figures/plots/histogram_season_data.png", 
   plot = hist_data_seasons,
   width = 7,
   height = 5
@@ -250,11 +251,20 @@ rcopy(
 dunn_test_results = rcopy(
   R"""
   df_summary_joinedR %>%
-    dunn_test(n~season, p.adjust = "bonf")
+    dunn_test(n~season, p.adjust = "bonf") %>%
+    mutate(across(where(is.numeric), ~ round(., 4))) %>%
+    rename(
+      Grupo1 = group1,
+      Grupo2 = group2,
+      Estadístico = statistic,
+      `p ajustado` = p.adj,
+      Significativo = p.adj.signif
+    )
   """
-)
+)[:,[2,3,6,7,8,9]]
 
-CSV.write("data/statistics/dunn_test_seasons.csv", dunn_test_results) 
+
+CSV.write("turtles_julia_analysis/_assets/menu2/tableinput/dunn_test_seasons.csv", dunn_test_results) 
 
 R"""
 boxplot_seasons <- df_summary_joinedR %>%
@@ -264,7 +274,7 @@ boxplot_seasons <- df_summary_joinedR %>%
     geom_boxplot(alpha=.5,width=.5,show.legend = F)
 
 ggsave(
-  filename = "images/figures/boxplot_seasons.png", 
+  filename = "turtles_julia_analysis/_assets/figures/plots/boxplot_seasons.png", 
   plot = boxplot_seasons,
   width = 7,
   height = 5

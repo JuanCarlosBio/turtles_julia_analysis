@@ -4,10 +4,6 @@ directories = [
   "data/",
   "data/raw/",
   "data/processed/",
-  "data/statistics/",
-  "images/",
-  "images/tables/",
-  "images/figures/"
 ]
 
 function main(dirercories_list::Vector)

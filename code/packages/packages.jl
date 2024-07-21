@@ -14,7 +14,8 @@ packages = [
   "HypothesisTests",
   "RCall",
   "MultivariateStats",
-  "PooledArrays"
+  "PooledArrays",
+  "Franklin"
   ]
 
 import Pkg
