@@ -2,25 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-    <loc>https://tlienart.github.io/FranklinTemplates.jl/menu3/index.html</loc>
+    <loc>https://github.com/JuanCarlosBio/turtles_julia_analysis/menu3/index.html</loc>
     <lastmod>2024-07-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://tlienart.github.io/FranklinTemplates.jl/menu2/index.html</loc>
+    <loc>https://github.com/JuanCarlosBio/turtles_julia_analysis/menu2/index.html</loc>
     <lastmod>2024-07-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://tlienart.github.io/FranklinTemplates.jl/menu1/index.html</loc>
+    <loc>https://github.com/JuanCarlosBio/turtles_julia_analysis/menu1/index.html</loc>
     <lastmod>2024-07-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://tlienart.github.io/FranklinTemplates.jl/index.html</loc>
+    <loc>https://github.com/JuanCarlosBio/turtles_julia_analysis/menu4/index.html</loc>
+    <lastmod>2024-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://github.com/JuanCarlosBio/turtles_julia_analysis/index.html</loc>
     <lastmod>2024-07-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
