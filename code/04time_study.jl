@@ -101,9 +101,6 @@ bar_plot_years <- df_turtles_per_yearR %>%
             fontface = "bold",
             show.legend = F,
             vjust = -.5) +
-  scale_fill_manual(values = c("red4","red3","red","gray35","gray55",
-                               "gray","blue4","blue",
-                               "skyblue","yellow4","yellowgreen","yellow")) +
   labs(
     title = "Tortugas marinas varadas en el tiempo en Tenerife (2000-2021)",
     x = "Año",
@@ -113,17 +110,15 @@ bar_plot_years <- df_turtles_per_yearR %>%
                      ## This way it would be easier to reuse in the futures
                      limits = c(0, $max_f_turtles_per_year + $max_f_turtles_per_year * .2)) +
   theme(
-    #panel.background = element_blank(),
     panel.grid = element_blank(),
     panel.background = element_rect(fill = "white", color = "white"),
-    #plot.background = element_rect(fill = "lightblue", color = "lightblue"),
     axis.line.x  = element_line(),
     title = element_text(size = 11, face = "bold"),
     plot.title = element_text(margin = margin(b = 1, unit = "lines"), hjust = .5),
+    axis.title.x = element_text(margin = margin(t = 10),size = 13),
+    axis.title.y = element_text(margin = margin(r = 10), size = 13),
     axis.ticks.x = element_blank(),
     axis.text.x = element_text(angle = 270, hjust = 1, vjust = .5),
-    axis.title.x = element_blank(),
-    axis.title.y = element_text(margin = margin(r = 10), size = 13),
     axis.text = element_text(size = 10.5),
     plot.caption =  element_text(hjust = 0, face = "italic")
   ) 
@@ -145,6 +140,10 @@ line_plot_seasons <- df_summary_joinedR %>%
   ggplot(aes(year, n, col = season, group = season)) +
   geom_point(size = 2) +
   geom_line(size = .75) +
+  scale_x_continuous(expand = expansion(0),
+                     ## This way it would be easier to reuse in the futures
+                     limits = c(2000, 2021.5),
+                     breaks = seq(2000, 2021, 1)) +
   scale_color_manual(
     breaks  = c("Spring","Summer","Fall","Winter"),
     values = c("yellowgreen","darkmagenta","orangered", "cyan3"),
@@ -268,15 +267,38 @@ CSV.write("./_assets/menu2/tableinput/dunn_test_seasons.csv", dunn_test_results)
 
 R"""
 boxplot_seasons <- df_summary_joinedR %>%
+  mutate(season = factor(
+    season,
+    levels = c("Spring", "Summer", "Fall", "Winter"),
+    labels = c("Primavera", "Verano", "Otoño", "Invierno"))) %>%
   ggplot(aes(season, n, fill = season)) +
-    geom_jitter(pch = 21, position = position_jitterdodge(.5, seed = 20101997),
-                alpha = .8,show.legend = F) +
-    geom_boxplot(alpha=.5,width=.5,show.legend = F)
+  geom_jitter(pch = 21, position = position_jitterdodge(1.5, seed = 20101997),
+              alpha = .8,show.legend = FALSE) +
+  geom_boxplot(alpha=.5,width=.5,show.legend = F) +
+  scale_fill_manual(values = c("yellowgreen","darkmagenta","orangered", "cyan3")) +
+  labs(
+    title = "Tortugas marinas varadas, estaciones",
+    x = "Estación",
+    y = "Número de tortugas"
+  ) +
+  theme_classic() +
+  theme(
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = "white", color = "white"),
+    axis.line.x  = element_line(),
+    title = element_text(size = 11, face = "bold"),
+    plot.title = element_text(margin = margin(b = 1, unit = "lines"), hjust = .5),
+    axis.title.x = element_text(margin = margin(t = 10),size = 11),
+    axis.title.y = element_text(margin = margin(r = 10), size = 10),
+    axis.ticks.x = element_blank(),
+    axis.text = element_text(size = 10.5),
+    plot.caption =  element_text(hjust = 0, face = "italic")
+  ) 
 
 ggsave(
   filename = "./_assets/figures/plots/boxplot_seasons.png", 
   plot = boxplot_seasons,
-  width = 7,
-  height = 5
+  width = 5,
+  height =3 
 )
 """
