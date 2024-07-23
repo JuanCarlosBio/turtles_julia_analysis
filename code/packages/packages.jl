@@ -15,7 +15,8 @@ packages = [
   "RCall",
   "MultivariateStats",
   "PooledArrays",
-  "Franklin"
+  "Franklin",
+  "Shapefile"
   ]
 
 import Pkg

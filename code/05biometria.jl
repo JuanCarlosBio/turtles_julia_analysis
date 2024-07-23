@@ -14,6 +14,8 @@ using
 R"""
 suppressMessages({
   library(tidyverse)
+  library(ggtext)
+  library(glue)
 })
 """
 
@@ -84,20 +86,64 @@ rename!(
 ## STATISTICAL ANALYSIS ##
 ##======================##
 
-## turtle Ages based on the CCL
+## turtle Ages based on the CCL BTW there is only Caretta caretta 
 df_ccl = filter(row -> row.biometry_names == "ccl_cm", df_turtles_biometry_long)
 
-df_ccl_summary = combine(groupby(df_ccl, :age), nrow => :biometry_names)
+df_ccl_summary = combine(groupby(df_ccl, :age), nrow => :n)
 
 R"""
 df_cclR <- $df_ccl_summary
-df_cclR %>%
+ccaretta_biometry <- df_cclR %>%
   mutate(age = factor(
     age,
-    levels = c("Hatchling", "Small Juvenile", "Big Juvenile", "Subadult", "Adult"
-  ))) %>%
-  ggplot(aes(age, biometry_names)) +
-  geom_col() 
+    levels = c("Hatchling", "Small Juvenile", "Big Juvenile", "Subadult", "Adult"),
+    labels = c("<20cm\nCría", "20-40cm\nJuvenil\nPequeño", 
+               "40-60cm\nJuvenil\nGrande", "60-80cm\nSubadulto", 
+               ">80\nAdulto"))) %>%
+  ggplot(aes(age, n)) +
+  geom_col(color = "black", width = .75, fill = "#ffa500") +
+  geom_text(aes(label = n), position = "identity", vjust = -.5, fontface="bold") + 
+  labs(
+    title = "Estimación del ciclo de vida de *Caretta caretta*",
+    x = "Ciclo de vida de la tortuga",
+    y = "Número de tortugas" 
+  ) +
+  scale_y_continuous(
+    expand = expansion(0),
+    limits = c(0, max(df_cclR$n) + (max(df_cclR$n) * 0.2))
+  ) +
+  theme_classic() + 
+  theme(
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = "white", color = "white"),
+    axis.line.x  = element_line(),
+    plot.title = element_markdown(
+      size = 13,
+      margin = margin(b = .5, unit = "lines"),
+      face = "bold", 
+      hjust = .5
+    ),
+    axis.title.x = element_text(
+      margin = margin(t = 5),
+      size = 10,
+      face = "bold"
+    ),
+    axis.title.y = element_text(
+      margin = margin(r = 10), 
+      size = 10,
+      face = "bold"
+    ),
+    axis.ticks.x = element_blank(),
+    axis.text = element_text(size = 10.5),
+    plot.caption =  element_text(hjust = 0, face = "italic")
+  ) 
+
+ggsave(
+  filename = "./_assets/figures/plots/C.caretta_biometry_age.png", 
+  plot = ccaretta_biometry,
+  width = 6,
+  height = 4 
+  )
 """
 
 ## Visualize the longer data to see the data distribution in histograms
