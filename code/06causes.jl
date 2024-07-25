@@ -30,6 +30,8 @@ rename!(
   :Specie => :n
 )
 
+df_causes.percentage = round.((df_causes.n / sum(df_causes.n)) * 100, digits = 2) 
+
 ## Now the subcauses
 df_subcauses = combine(
   groupby(df_turtles, [:Subcause]), nrow => :Specie
@@ -41,18 +43,62 @@ rename!(
   :Specie => :n
 )
 
+## Max Percentage values
+max_percentage_causes = maximum(df_causes.percentage)
+
 R"""
 df_causesR <- $df_causes %>% 
   as_tibble() %>%
   arrange(desc(n))
+  
 
-df_causesR %>% 
+causes_barplot <- df_causesR %>% 
   mutate(cause = factor(
     cause,
     levels = unique(df_causesR$cause)
   )) %>%
-  ggplot(aes(cause, n)) +
-  geom_col()
+  ggplot(aes(cause, percentage, fill = percentage)) +
+  geom_col(width = .5, color = "black", show.legend = FALSE) +
+  geom_text(
+    aes(label = glue("{percentage} %")),
+    position = "stack",
+    vjust = -.5) +
+  scale_y_continuous(
+    expand = expansion(0),
+    limits = c(0,$max_percentage_causes + 10)
+    ) +
+  scale_x_discrete(
+    labels = c("Equipo de\npesca",
+               "Enfermedad",
+               "Otras",
+               "Trauma",
+               "Plástico",
+               "Petróleo\ncrudo",
+               "Indeterminada",
+               "Muerte\nnatural")
+    ) +
+  scale_fill_gradient(low = "blue", high = "red") +
+  labs(
+    title = "Causas de los varamientos de tortugas marinas en Tenerife",
+    subtitle = glue("<i>Número total de varamientos registrados: **{sum(df_causesR$n)}</i>**"),
+    x = "Cause del variamiento",
+    y = "Porcentaje" 
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(face = "bold", hjust = .5),
+    plot.subtitle = element_markdown(),
+    axis.title = element_text(face = "bold"),
+    axis.text.x = element_text(color = "black"),
+    axis.ticks.x = element_blank()
+  )
+
+ggsave(
+  filename = "./_assets/figures/plots/barplot_causes.png", 
+  plot = causes_barplot,
+  width = 7,
+  height =5 
+)  
 """
 
 ## Categorization of the subcauses 

@@ -251,7 +251,21 @@ dunn_test_results = rcopy(
   R"""
   df_summary_joinedR %>%
     dunn_test(n~season, p.adjust = "bonf") %>%
-    mutate(across(where(is.numeric), ~ round(., 4))) %>%
+    mutate(
+      across(where(is.numeric), ~ round(., 4)),
+      group1 = case_when(
+        group1 == "Fall" ~ "Otoño",
+        group1 == "Winter" ~ "Invierno",
+        group1 == "Summer" ~ "Verano",
+        group1 == "Spring" ~ "Primavera"
+      ),
+      group2 = case_when(
+        group2 == "Fall" ~ "Otoño",
+        group2 == "Winter" ~ "Invierno",
+        group2 == "Summer" ~ "Verano",
+        group2 == "Spring" ~ "Primavera"
+      )
+    ) %>%
     rename(
       Grupo1 = group1,
       Grupo2 = group2,
