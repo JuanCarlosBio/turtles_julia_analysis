@@ -12,7 +12,7 @@ sf_turtles_location <- read_sf("data/processed/gc_municipality_turtles.shp") %>%
 sf_turtles_location %>%
   ggplot() +
   geom_sf(aes(fill = n)) +
-  geom_sf_text(aes(label = n), size = 1) +
+  geom_sf_text(aes(label = n)) +
   scale_fill_gradient(low = "white", high = "red") +
   labs(
     title = "Número de tortugas varadas según el municipio",

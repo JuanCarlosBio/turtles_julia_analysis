@@ -8,16 +8,16 @@ rss_pubdate = Date(2019, 5, 1)
 tags = ["syntax", "code", "image"]
 +++
 
-# **Estudio temporal de los varamientos de tortugas marinas**
+# **Causas y Subcausas de los varamientos**
 
-## Tortugas marinas varadas según los últimos en dos décadas
+## Causas de los **varamientos** en Tenerife 
 
-Se empezará estudiando desde el año 2000 hasta el último mes del año 2021 del que data la base de datos.
+La principal causa de los varamientos es la pesaca, siguiendo las tortugas enfermas.
 
 ~~~
 <div class="row">
   <div class="container">
-    <img class="left" src="/assets/rndimg.jpg">
+    <img class="left" src="/assets/figures/plots/barplot_causes.png">
     <p>
     Descripción del gráfico: 
     </p>
