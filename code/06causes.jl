@@ -30,7 +30,7 @@ rename!(
   :Specie => :n
 )
 
-df_causes.percentage = round.((df_causes.n / sum(df_causes.n)) * 100, digits = 2) 
+df_causes.percentage = round.((df_causes.n / sum(df_causes.n)) * 100, digits = 1) 
 
 ## Now the subcauses
 df_subcauses = combine(
@@ -101,158 +101,59 @@ ggsave(
 )  
 """
 
-## Categorization of the subcauses 
-## HR == Human related
-## ANHR == Apparently Not Human Related 
-## UND == Undeterminated
-
-R"""
-$df_subcauses %>%
-  as_tibble() %>%
-  mutate(
-   categorized_subcause = case_when(
-    subcause == "Nets" 
-    | subcause == "Entangled"
-    | subcause == "Boat collision"
-    | subcause == "Fish and shrimp trap"
-    | subcause == "Harpoon" 
-    | subcause == "Ropes"
-    | subcause == "Hook"
-    | subcause == "Crude oil"
-    | subcause == "Nylon"
-    | subcause == "Scientific capture" ~ "HR",
-    subcause == "Apparently healthy"
-    | subcause == "Buoyancy problems"
-    | subcause == "Shark bite"
-    | subcause == "Malformation"
-    | subcause == "Malnutrition"
-    | subcause == "Respiratory difficulty"
-    | subcause == "Epizoites"
-    | subcause == "Cachexia"
-    | subcause == "Septicaemia"
-    | subcause == "Weakness and exhaustion"
-    | subcause == "Disorientation" ~ "ANHR",
-    subcause == "Fracture"
-    | subcause == "NA"
-    | subcause == "Various injuries"
-    | subcause == "Shock and fractures"
-    | subcause == "Shock and various injuries" ~ "UND"
-   ) 
-  ) %>%
-  arrange(desc(n)) %>%
-  drop_na() -> df_subcausesR
-"""
-
-R"""
-## Lo ideal sería cambiar esta versión por una tabla del paquete gt
-df_subcauses_hr <- df_subcausesR %>%
-  filter(categorized_subcause == "HR") %>%
-  pivot_wider(
-    id_cols = subcause, 
-    names_from = categorized_subcause, 
-    values_from = n
-    ) %>%
-  mutate(subcause = case_when(
-    HR <= 5 ~ "Others",
-    HR >  5 ~ as.character(subcause)
-  )) %>%
-  group_by(subcause) %>%
-  summarise(HR = sum(HR)) %>%
-  arrange(desc(HR))
-
-df_subcauses_anhr <- df_subcausesR %>%
-  filter(categorized_subcause == "ANHR") %>%
-  pivot_wider(
-    id_cols = subcause, 
-    names_from = categorized_subcause, 
-    values_from = n
-    )%>%
-  mutate(subcause = case_when(
-    ANHR <= 5 ~ "Others",
-    ANHR >  5 ~ as.character(subcause)
-  )) %>%
-  group_by(subcause) %>%
-  summarise(ANHR = sum(ANHR)) %>%
-  arrange(desc(ANHR))
-
-df_subcauses_und <- df_subcausesR %>%
-  filter(categorized_subcause == "UND") %>%
-  pivot_wider(
-    id_cols = subcause, 
-    names_from = categorized_subcause, 
-    values_from = n
-    ) %>%
-  mutate(subcause = case_when(
-    UND <= 5 ~ "Others",
-    UND >  5 ~ as.character(subcause)
-  )) %>%
-  group_by(subcause) %>%
-  summarise(UND = sum(UND)) %>%
-  arrange(desc(UND))
-"""
-
-## Creating the GT tables to represent the data before
-R"""
-subcauses_human_related <- df_subcauses_hr %>%
-  gt() %>%
-  tab_header(
-    title = md("**Subcauses classified as:<br><u>Related to Humans</u>**")
-  ) %>%
-  cols_label(
-    subcause = md("**Subcause**"),
-    HR = md("**Nº turtles stranding**")
-  )
-
-subcauses_non_human_related <- df_subcauses_anhr %>%
-  gt() %>%
-  tab_header(
-    title = md("**Subcauses classified as:<br><u>Apparently non Related<br>to Humans</u>**")
-  ) %>%
-  cols_label(
-    subcause = md("**Subcause**"),
-    ANHR = md("**Nº turtles stranding**")
-  )
-
-subcauses_undeterminated <- df_subcauses_und %>%
-  gt() %>%
-  tab_header(
-    title = md("**Subcauses classified as:<br><u>Undeterminated</u>**")
-  ) %>%
-  cols_label(
-    subcause = md("**Subcause**"),
-    UND = md("**Nº turtles stranding**")
-  )
-"""
-
-R"""
-html_table_1 <- as.tags(subcauses_human_related)
-html_table_2 <- as.tags(subcauses_non_human_related)
-html_table_3 <- as.tags(subcauses_undeterminated)
-
-# Combine the HTML tables into a single HTML document
-combined_html <- tagList(
-  html_table_1,
-  html_table_2,
-  html_table_3
-)
-
-save_html(combined_html, file = "images/tables/sucauses_tables.html")
-"""
-
 ## =============================== ##
 ## Study of the subcauses per year
 ## =============================== ##
 
 df_causes_years = df_turtles[:,[:Cause, :year]]
+
 rename!(
-  df_causes_years,
-  :Cause => :cause
+  df_causes_years, 
+  :Cause => :cause,
 )
-n_df_causes_years = combine(groupby(df_causes_years, [:cause, :year]), nrow => :n)
+
+df_causes_years.year = string.(df_causes_years.year)
+
+year_causes_grid = DataFrame(
+  vec(collect(Base.product(
+    string.(levels(df_causes_years.year)),
+    string.(levels(df_causes_years.cause))
+  )))
+)
+
+rename!(
+  year_causes_grid,
+  :1 => :year,
+  :2 => :cause
+)
+
+n_df_causes_years = combine(
+  groupby(df_causes_years, [:cause, :year]), 
+  nrow => :n)
+
+df_summary_year_causes_joined = leftjoin(
+  year_causes_grid, 
+  n_df_causes_years, 
+  on = [:year, :cause]
+  )
+
+df_summary_year_causes_joined[!, :n] = ifelse.(
+  ismissing.(df_summary_year_causes_joined.n), 0, df_summary_year_causes_joined.n
+  )
+
+df_summary_year_causes_joined.year = parse.(Int, df_summary_year_causes_joined.year)
+
+# max_year_arrave = maximum(
+#   combine(groupby(
+#     df_summary_year_causes_joined, 
+#     :year), :n => sum => :n
+#     ).n
+#   )
 
 ## Raw years and causes
 R"""
-$n_df_causes_years %>%
+year_causes_barplot <- $df_summary_year_causes_joined %>%
+  filter(n > 0) %>%
   ggplot(aes(year, n, fill = reorder(cause,n))) +
   geom_col(color = "black", alpha=.5) +
   geom_text(aes(year, n, label = n), position = position_stack(vjust = .5)) +
@@ -261,116 +162,87 @@ $n_df_causes_years %>%
   )) +
   scale_x_continuous(
     breaks = seq(2000,2021,1)
+  ) +
+  scale_y_continuous(expand = expansion(0)) +
+  labs(
+    title = "Causas de los varamientos de tortugas cada año",
+    x = "Año",
+    y = "Número de tortugas",
+    fill = "Causas"
+  ) +
+  theme_classic() +
+  theme(
+    axis.y.line = element_blank(),
+    plot.title = element_text(face = "bold", hjust = .5, size = 15),
+    plot.subtitle = element_markdown(),
+    axis.title = element_text(face = "bold", size = 14),
+    axis.text = element_text(size = 12),
+    axis.text.x = element_text(angle = 270, hjust = 1, vjust = .5),
+    axis.ticks.x = element_blank(),
+    legend.title = element_text(face = "bold", size = 12),
+    legend.text = element_text(size = 12)
   )
+
+ggsave(
+  filename = "./_assets/figures/plots/year_causes_barplot.png", 
+  plot = year_causes_barplot,
+  width = 11,
+  height = 7 
+)
 """
 
 ## Percentage by the years
 R"""
-$n_df_causes_years %>%
+year_causes_percentage_barplot <- $df_summary_year_causes_joined %>%
+  filter(n > 0) %>%
   group_by(year) %>%
   mutate(percentage = (n/sum(n))*100) %>%
-  ggplot(aes(year, percentage, fill = reorder(cause,percentage))) +
+  ggplot(aes(year, percentage,fill = reorder(cause,percentage))) +
   geom_col(color = "black", alpha=.5) +
-  geom_text(aes(year, percentage, label = glue("{round(percentage, 2)} %")), position = position_stack(vjust = .5)) +
+  geom_text(
+    aes(year, percentage, label = glue("{round(percentage, 1)}")), 
+    position = position_stack(vjust = .5)
+  ) +
+  scale_y_continuous(
+    expand = expansion(0),
+    limits = c(0,100),
+    breaks = seq(0,100,15)
+  ) +
   scale_fill_manual(values = c(
-    "white", "gray", "yellow", "blue", "forestgreen", "orange", "magenta", "red"
+    "white", 
+    "gray", 
+    "yellow", 
+    "blue", 
+    "forestgreen", 
+    "orange", 
+    "magenta", 
+    "red"
   )) +
   scale_x_continuous(
     breaks = seq(2000,2021,1)
+  ) +
+  labs(
+    title = "Porcentaje de las causas de los varamientos",
+    x = "Año",
+    y = "Porcentaje (%)",
+    fill = "Causa"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(face = "bold", hjust = .5, size = 15),
+    plot.subtitle = element_markdown(),
+    axis.title = element_text(face = "bold", size = 14),
+    axis.text = element_text(size = 12),
+    axis.text.x = element_text(angle = 270, hjust = 1, vjust = .5),
+    axis.ticks.x = element_blank(),
+    legend.title = element_text(face = "bold", size = 12),
+    legend.text = element_text(size = 12)
   )
-"""
 
-## Subcauses categorized as HR, ANHR and UND
-df_subcauses_years = combine(
-  groupby(df_turtles, [:Subcause, :year]), nrow => :n
-  )
-
-rename!(
-  df_subcauses_years,
-  :Subcause => :subcause
+ggsave(
+  filename = "./_assets/figures/plots/year_causes_percentage_barplot.png", 
+  plot = year_causes_percentage_barplot,
+  width = 11,
+  height = 7 
 )
-
-## Filtering the last year with incomplete data
-filter!(row -> row.year < 2021, df_subcauses_years)
-
-R"""
-$df_subcauses_years %>%
-  as_tibble() %>%
-  mutate(
-   categorized_subcause = case_when(
-    subcause == "Nets" 
-    | subcause == "Entangled"
-    | subcause == "Boat collision"
-    | subcause == "Fish and shrimp trap"
-    | subcause == "Harpoon" 
-    | subcause == "Ropes"
-    | subcause == "Hook"
-    | subcause == "Crude oil"
-    | subcause == "Nylon"
-    | subcause == "Scientific capture" ~ "HR",
-    subcause == "Apparently healthy"
-    | subcause == "Buoyancy problems"
-    | subcause == "Shark bite"
-    | subcause == "Malformation"
-    | subcause == "Malnutrition"
-    | subcause == "Respiratory difficulty"
-    | subcause == "Epizoites"
-    | subcause == "Cachexia"
-    | subcause == "Septicaemia"
-    | subcause == "Weakness and exhaustion"
-    | subcause == "Disorientation" ~ "ANHR",
-    subcause == "Fracture"
-    | subcause == "NA"
-    | subcause == "Various injuries"
-    | subcause == "Shock and fractures"
-    | subcause == "Shock and various injuries" ~ "UND"
-   ) 
-  ) %>% 
-  group_by(categorized_subcause, year) %>%
-  count() %>%
-  arrange(desc(n)) %>%
-  drop_na() %>%
-  write_csv("data/processed/subcauses_and_years.csv") 
-"""
-
-df_subcauses_proprocessed = CSV.read("data/processed/subcauses_and_years.csv", DataFrame)
-
-## Creating a grid to fill the years with 0 values!
-#subcauses_years_grid
-df_subcauses_proprocessed_grid = DataFrame(
-  vec(collect(Base.product(
-    string.(levels(df_subcauses_proprocessed[!,:categorized_subcause])),
-    string.(levels(df_subcauses_proprocessed[!,:year]))
-  )))
-)
-
-rename!(
-  df_subcauses_proprocessed_grid,
-  :1 => :categorized_subcause,
-  :2 => :year
-)
-
-df_subcauses_proprocessed.year = string.(df_subcauses_proprocessed.year)
-
-df_subcauses_proprocessed = leftjoin(
-  df_subcauses_proprocessed_grid,
-  df_subcauses_proprocessed,
-  on = [:categorized_subcause, :year]
-)
-
-df_subcauses_proprocessed.year = parse.(Int, df_subcauses_proprocessed.year)
-
-df_subcauses_proprocessed.n = ifelse.(
-  ismissing.(df_subcauses_proprocessed.n), 0, df_subcauses_proprocessed.n
-)
-
-R"""
-$df_subcauses_proprocessed %>%
-  mutate(categorized_subcause = factor(
-    categorized_subcause,
-    levels = c("UND", "ANHR", "HR"),
-    labels = c("Undeterminated", "Apparently NON Human Related", "Human Related") 
-  )) %>% 
-  ggplot(aes(year, n, color = categorized_subcause)) +
-  geom_line(linewidth = 1)
 """

@@ -234,7 +234,7 @@ PCA_biometry <-  df_YteR %>%
     values = c("pink", "green", "skyblue", "yellow")
   ) +
   labs(
-    title = "Análisis multivariante, modelo PCA para las varables biométricas",
+    title = "Predicción del modelo PCA para las varables biométricas",
     x = glue("PC1 ({pc1_variance_expalainedR} % varianza explicada)"),
     y = glue("PC2 ({pc2_variance_expalainedR} % varianza explicada)"),
     color = "Ciclo de vida",
