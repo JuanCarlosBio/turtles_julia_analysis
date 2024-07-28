@@ -4,6 +4,8 @@ using
   DataFrames,
   DataFramesMeta,
   CSV,
+  Statistics,
+  Tidier,
   RCall
 
 R"""
@@ -18,6 +20,50 @@ suppressMessages(suppressWarnings({
 
 processed_data::String = "data/processed/stranding_turtles_processed.csv"
 df_turtles = CSV.read(processed_data, DataFrame)
+
+## Translate this becouse the webpage is spanish from ESPAÑA
+df_turtles = @chain df_turtles begin
+  @mutate(
+    Cause = case_when(
+      Cause == "Fishing gear"   => "Equipo de pesca",
+      Cause == "Disease"        => "Enfermedad",
+      Cause == "Others"         => "Otras",
+      Cause == "Trauma"         => "Traumatismo",
+      Cause == "Plastic"        => "Plástico",
+      Cause == "Undetermined" => "Indeterminada",
+      Cause == "Crude oil"      => "Petróleo",
+      Cause == "Natural Death"  => "Muerte natural"),
+    Subcause = case_when(
+      Subcause == "Nets" => "Red de pesca", 
+      Subcause == "Septicaemia" => "Septicaemia", 
+      Subcause == "Entangled" => "Enredada", 
+      Subcause == "NA" => "NA", 
+      Subcause == "Hook" => "Anzuelo", 
+      Subcause == "Cachexia" => "Caquexia", 
+      Subcause == "Crude oil" => "Petróleo", 
+      Subcause == "Boat collision" => "Choque con bote", 
+      Subcause == "Apparently healthy" => "Aparenta sana", 
+      Subcause == "Shark bite" => "Mordida tiburón", 
+      Subcause == "Fracture" => "Fractura", 
+      Subcause == "Various injuries" => "Lesiones varias", 
+      Subcause == "Ingestion" => "Ingestión", 
+      Subcause == "Malformation" => "Malformación", 
+      Subcause == "Weakness and exhaustion" => "Debilitada y agotada", 
+      Subcause == "Buoyancy problems" => "Problemas para flotar", 
+      Subcause == "Shock and various injuries" => "Shock/Lesiones varias", 
+      Subcause == "Shock and fractures" => "Shock/Fracturas", 
+      Subcause == "Epizoites" => "Epizoítos", 
+      Subcause == "Malnutrition" => "Malnutrición", 
+      Subcause == "Disorientation" => "Desorientación", 
+      Subcause == "Fish and shrimp trap" => "Trampas para peces y camarones", 
+      Subcause == "Nylon" => "Nylon", 
+      Subcause == "Harpoon" => "Arpón", 
+      Subcause == "Ropes" => "Cuerda", 
+      Subcause == "Scientific capture" => "Captura científica", 
+      Subcause == "Respiratory difficulty" => "Dificultad para respirar" 
+      )
+  )
+end
 
 ## Let's get the Species values
 df_causes = combine(
@@ -34,13 +80,13 @@ df_causes.percentage = round.((df_causes.n / sum(df_causes.n)) * 100, digits = 1
 
 ## Now the subcauses
 df_subcauses = combine(
-  groupby(df_turtles, [:Subcause]), nrow => :Specie
+  groupby(df_turtles, [:Cause, :Subcause]), nrow => :n
   )
 
 rename!(
   df_subcauses,
-  :Subcause => :subcause,
-  :Specie => :n
+  :Cause => :cause,
+  :Subcause => :subcause
 )
 
 ## Max Percentage values
@@ -101,9 +147,9 @@ ggsave(
 )  
 """
 
-## =============================== ##
-## Study of the subcauses per year
-## =============================== ##
+## ============================= ##
+## Study of the causes per year
+## ============================= ##
 
 df_causes_years = df_turtles[:,[:Cause, :year]]
 
@@ -205,8 +251,10 @@ year_causes_percentage_barplot <- $df_summary_year_causes_joined %>%
   ) +
   scale_y_continuous(
     expand = expansion(0),
-    limits = c(0,100),
-    breaks = seq(0,100,15)
+    limits = c(0,105),
+    breaks = seq(0,100,25),
+    labels = paste(glue("{seq(0,100,25)}%"))
+
   ) +
   scale_fill_manual(values = c(
     "white", 
@@ -224,7 +272,7 @@ year_causes_percentage_barplot <- $df_summary_year_causes_joined %>%
   labs(
     title = "Porcentaje de las causas de los varamientos",
     x = "Año",
-    y = "Porcentaje (%)",
+    y = "Porcentaje",
     fill = "Causa"
   ) +
   theme_classic() +
@@ -244,5 +292,60 @@ ggsave(
   plot = year_causes_percentage_barplot,
   width = 11,
   height = 7 
+)
+"""
+
+## ============================= ##
+## Study of the causes per year
+## ============================= ##
+
+## We will study the subcauses of most common causes
+
+R"""
+causes_tile <- $df_subcauses %>%
+  mutate(
+    subcause = case_when(
+      n < 10 | n == "NA" ~ "Otras",
+      n >= 10 ~ as.character(subcause)
+    )) %>%
+  group_by(cause, subcause) %>%
+  summarise(n = sum(n)) %>% 
+  filter(cause != "Indeterminada") %>%
+  ggplot(aes(reorder(cause, n), reorder(subcause, n), fill = n)) +
+  geom_tile(color = "black") +
+  geom_text(aes(label = n)) +
+  scale_fill_gradient(low = "white", high = "red") +
+  scale_x_discrete(
+    labels = c(
+      "Muerte\nnatral", 
+      "Traumatismo", 
+      "Plástico",
+      "Petróleo",
+      "Otras",
+      "Enfermedad",
+      "Equipo\nde pesca")
+  ) +
+  labs(
+    title = "Relación entre causas y subcausas",
+    x = "Causa",
+    y = "Subcausa",
+    fill = "Número\nde tortugas"
+  ) +
+  theme(
+    panel.background = element_rect(fill = "white"),
+    panel.grid = element_line(color = "#999ce5", linetype = "dashed"),
+    plot.title = element_text(face = "bold", size = 12, hjust = .5, margin = margin(b = 10)),
+    axis.title = element_text(face = "bold", size = 11),
+    axis.ticks = element_blank(),
+    legend.position = "bottom",
+    legend.key.height = unit(0.2, "cm"),
+    legend.key.width = unit(2, "cm")
+  )
+
+ggsave(
+  filename = "./_assets/figures/plots/causes_tile.png", 
+  plot = causes_tile,
+  width = 8,
+  height = 6
 )
 """
