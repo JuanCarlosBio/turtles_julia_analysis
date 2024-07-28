@@ -2,7 +2,7 @@
 title = "Estudio biométrico"
 +++
 
-# Estudio biométrico de las tortugas marinas
+# **Estudio biométrico de las tortugas marinas**
 
 Las Islas Canarias es un lugar de paso para las tortugas marinas, habiendo principalmente individuos cuyo ciclo de vida se encuentra en la etapa juvenil.
 

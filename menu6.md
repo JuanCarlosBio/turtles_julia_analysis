@@ -7,14 +7,12 @@ rss = "A short description of the page which would serve as **blurb** in a `RSS`
 tags = ["syntax", "code"]
 +++
 
-# **Localización de los varamientos**
-
-## Varamientos según el municipios 
+# **Condición de las tortugas al llegar a la tohnilla**
 
 ~~~
 <div class="row">
   <div class="container">
-    <img class="left" src="/assets/figures/plots/mapa_calor.png">
+    <img class="left" src="/assets/figures/plots/turtle_condition.png">
     <p>
     Descripción del gráfico: El municipio donde más tortugas llegan es Adeje con unas 341 especies ... 
     </p>

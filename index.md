@@ -1,4 +1,4 @@
-@def title = "Franklin Example"
+@def title = "Inicio"
 @def tags = ["syntax", "code"]
 
 # **Tortugas marinas varadas en Tenerife (Islas Canarias)**
@@ -9,7 +9,7 @@
 
 ### Base de datos proporcionados por el Centro de Recuperación de Fauna Silvestre (CRFS) La Tahonilla.
 
-Dicha base de datos se puede encontrar públicamente en los [Research Data ULL](https://data.mendeley.com/datasets/p6wmtv6t5g/2) de la [Universidad de La Laguna (ULL)](https://www.ull.es/).
+Dicha base de datos se puede encontrar públicamente en los [Research Data ULL](https://data.mendeley.com/datasets/p6wmtv6t5g/2) usando la **CC BY 4.0 Licence** de la [Universidad de La Laguna (ULL)](https://www.ull.es/).
 
 ## Descripción de los autores de la base de datos:
 

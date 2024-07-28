@@ -53,4 +53,18 @@ La principal causa de los varamientos es la pesaca, siguiendo las tortugas enfer
 </div>
 ~~~
 
+## Relación entre las causas con sus subcausas
+
+~~~
+<div class="row">
+  <div class="container">
+    <img class="left" src="/assets/figures/plots/causes_tile.png">
+    <p>
+    Descripción del gráfico: 
+    </p>
+    <div style="clear: both"></div>      
+  </div>
+</div>
+~~~
+
 
