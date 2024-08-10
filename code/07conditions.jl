@@ -1,10 +1,12 @@
 #!/usr/bin/env julia
 
 using
+  CSV,
   DataFrames,
   DataFramesMeta,
   Statistics,
-  RCall
+  RCall,
+  Tidier
 
 R"""
 suppressMessages(suppressWarnings({

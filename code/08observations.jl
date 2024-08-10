@@ -46,9 +46,6 @@ tibble(words = $lower_all_words) %>%
   print(n=Inf)
 """
 
-# Print or return the word counts
-println(word_count)
-
 
 ## R parse function:
 R"""
@@ -146,9 +143,9 @@ df_injury.body <- expand.grid(injury=as.character(unique(as.character(df_turtles
                                by=c("injury","body")
                              ) %>% mutate(n=ifelse(is.na(n),0,n)) 
 
-df_injury.body %>%
+injury.body_plot <- df_injury.body %>%
   filter(!(injury %in% NA) &  !(body %in% NA)) %>% 
-  ggplot(aes(reorder(injury, n), reorder(body, n), fill = n)) +
+  ggplot(aes(reorder(body, n),reorder(injury, n), fill = n)) +
   geom_tile(col = "black", alpha = .9) +
   geom_text(aes(label = n)) +
   labs(x = "Injury",
@@ -158,6 +155,13 @@ df_injury.body %>%
   scale_fill_gradient(
     name="Nº tortugas",
     low = "skyblue", high = "red") 
+
+ggsave(
+  "_assets/figures/plots/injury_body.png",
+  plot = injury.body_plot,
+  width = 8,
+  height = 5
+)
 """
 
 
@@ -170,7 +174,7 @@ df_state.body <- expand.grid(state=as.character(unique(as.character(df_turtles_o
                                by=c("state","body")
                              ) %>% mutate(n=ifelse(is.na(n),0,n)) 
 
-df_state.body %>%
+state.body_plot <- df_state.body %>%
   filter(!(state %in% NA) &  !(body %in% NA)) %>% 
   ggplot(aes(reorder(state, n), reorder(body, n), fill = n)) +
   geom_tile(col = "black", alpha = .9) +
@@ -182,6 +186,13 @@ df_state.body %>%
   scale_fill_gradient(
     name="Nº tortugas",
     low = "skyblue", high = "red") 
+
+ggsave(
+  "_assets/figures/plots/state_body.png",
+  plot = state.body_plot,
+  width = 8,
+  height = 5
+)
 """
 
 R"""
@@ -193,7 +204,7 @@ df_state.injury <- expand.grid(state=as.character(unique(as.character(df_turtles
                                by=c("state","injury")
                              ) %>% mutate(n=ifelse(is.na(n),0,n)) 
 
-df_state.injury %>%
+state.injury_plot <- df_state.injury %>%
   filter(!(state %in% NA) &  !(injury %in% NA)) %>% 
   ggplot(aes(reorder(state, n), reorder(injury, n), fill = n)) +
   geom_tile(col = "black", alpha = .9) +
@@ -205,5 +216,11 @@ df_state.injury %>%
   scale_fill_gradient(
     name="Nº tortugas",
     low = "skyblue", high = "red") 
-"""
 
+ggsave(
+  "_assets/figures/plots/state_injury.png",
+  plot = state.injury_plot,
+  width = 8,
+  height = 5 
+)
+"""
