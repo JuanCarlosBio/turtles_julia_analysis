@@ -16,7 +16,8 @@ packages = [
   "MultivariateStats",
   "PooledArrays",
   "Franklin",
-  "Shapefile"
+  "Shapefile",
+  "Tidier"
   ]
 
 import Pkg

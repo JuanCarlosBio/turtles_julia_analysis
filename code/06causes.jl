@@ -218,7 +218,6 @@ year_causes_barplot <- $df_summary_year_causes_joined %>%
   ) +
   theme_classic() +
   theme(
-    axis.y.line = element_blank(),
     plot.title = element_text(face = "bold", hjust = .5, size = 15),
     plot.subtitle = element_markdown(),
     axis.title = element_text(face = "bold", size = 14),
@@ -226,14 +225,16 @@ year_causes_barplot <- $df_summary_year_causes_joined %>%
     axis.text.x = element_text(angle = 270, hjust = 1, vjust = .5),
     axis.ticks.x = element_blank(),
     legend.title = element_text(face = "bold", size = 12),
-    legend.text = element_text(size = 12)
+    legend.text = element_text(size = 12),
+    legend.position = "top",
+    legend.direction = "vertical"
   )
 
 ggsave(
   filename = "./_assets/figures/plots/year_causes_barplot.png", 
   plot = year_causes_barplot,
   width = 11,
-  height = 7 
+  height = 10
 )
 """
 
@@ -284,14 +285,16 @@ year_causes_percentage_barplot <- $df_summary_year_causes_joined %>%
     axis.text.x = element_text(angle = 270, hjust = 1, vjust = .5),
     axis.ticks.x = element_blank(),
     legend.title = element_text(face = "bold", size = 12),
-    legend.text = element_text(size = 12)
+    legend.text = element_text(size = 12),
+    legend.position = "top",
+    legend.direction = "vertical"
   )
 
 ggsave(
   filename = "./_assets/figures/plots/year_causes_percentage_barplot.png", 
   plot = year_causes_percentage_barplot,
   width = 11,
-  height = 7 
+  height = 10 
 )
 """
 
