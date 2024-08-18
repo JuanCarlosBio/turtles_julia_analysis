@@ -108,7 +108,7 @@ Los ejemplares de esta especie obtienen la madurez alrededor de 10 - 39 años, e
 </div>
 ~~~
 
-## 5. Tortuga olivacea, *Lepidochelys olivacea* (Eschscholtz,1829)
+### 5. Tortuga olivacea, *Lepidochelys olivacea* (Eschscholtz,1829)
 
 ~~~
 <div class="row">
@@ -125,7 +125,7 @@ Los ejemplares de esta especie obtienen la madurez alrededor de 10 - 39 años, e
 </div>
 ~~~
 
-## 6. Tortuga lora, *Lepidochelys kempii* (Garman, 1880)
+### 6. Tortuga lora, *Lepidochelys kempii* (Garman, 1880)
 
 ~~~
 <div class="row">
@@ -142,7 +142,7 @@ Los ejemplares de esta especie obtienen la madurez alrededor de 10 - 39 años, e
 </div>
 ~~~
 
-## 6. Tortuga lora, *Lepidochelys kempii* (Garman, 1880)
+### 7. Tortuga plana, *Natator depressus* (Garman, 1880)
 
 ~~~
 <div class="row">
@@ -171,6 +171,8 @@ De las siete especies de tortugas marinas, en canarias se han avistado/rescatado
 - *Lepidochelys olivacea*
 - *Lepidochelys kempii*
 - *Dermochelys coriacea*
+
+La tortuga más común de las islas con diferencia se trata de la tortuga boba.
 
 ## **Centros para la recuperación de fauna silvestre en canarias**
 
