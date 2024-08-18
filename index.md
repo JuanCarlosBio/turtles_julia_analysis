@@ -5,7 +5,15 @@
 
 ## Análisis de una base de datos con los varamientos registrados del 2000 al 2021
 
-[Código abierto en GitHub](https://github.com/JuanCarlosBio/turtles_julia_analysis) 
+La razón de este artículo web consiste en analizar una base de datos pública relacionada con tortugas marinas varadas en tenerife, siendo trasladadas al Centro de Recuperación de Fauna Silvestre, "La Tahonilla", perteneciente al cabildo de Tenerife. En su momento realicé un análsis de una base de datos parecida en mi trabajo de Fin de Grado, usando principalmente el lenguaje de programación R.
+
+El objetivo principal es aprender a usar nuevas tecnologías para analizar datos:
+
+* Aprender sobre la biología/ecología de las tortugas marinas.
+* Aprender el Lenguaje de Programación Julia para análisis de datos.
+* Aprender a usar "FrameWorks" para realizar páginas web con Julia.
+* Combinar este lenguaje de programación con otros que domino mejor (R, Python, Bash...)  
+* Compartir lo aprendido usando control de versiones mediante [código abierto en GitHub](https://github.com/JuanCarlosBio/turtles_julia_analysis) (MIT License)
 
 ### Base de datos proporcionados por el Centro de Recuperación de Fauna Silvestre (CRFS) La Tahonilla.
 
@@ -32,7 +40,9 @@ La población de tortugas marinas ha sufrido un decrecimiento significativo en l
   </div>
 </div>
 ~~~
- 
+
+--- 
+
 ~~~
 <center>
 <small><strong><i>Autor del artículo web:</i></strong>
@@ -42,3 +52,4 @@ La población de tortugas marinas ha sufrido un decrecimiento significativo en l
 </center>
 ~~~ 
 
+---
