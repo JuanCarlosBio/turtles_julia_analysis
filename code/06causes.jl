@@ -25,14 +25,14 @@ df_turtles = CSV.read(processed_data, DataFrame)
 df_turtles = @chain df_turtles begin
   @mutate(
     Cause = case_when(
-      Cause == "Fishing gear"   => "Equipo de pesca",
+      Cause == "Fishing gear"   => "Equipo\nde pesca",
       Cause == "Disease"        => "Enfermedad",
       Cause == "Others"         => "Otras",
       Cause == "Trauma"         => "Traumatismo",
       Cause == "Plastic"        => "Plástico",
       Cause == "Undetermined" => "Indeterminada",
       Cause == "Crude oil"      => "Petróleo",
-      Cause == "Natural Death"  => "Muerte natural"),
+      Cause == "Natural Death"  => "Muerte\nnatural"),
     Subcause = case_when(
       Subcause == "Nets" => "Red de pesca", 
       Subcause == "Septicaemia" => "Septicaemia", 
@@ -214,7 +214,7 @@ year_causes_barplot <- $df_summary_year_causes_joined %>%
     title = "Causas de los varamientos de tortugas cada año",
     x = "Año",
     y = "Número de tortugas",
-    fill = "Causas"
+    fill = "Causas:"
   ) +
   theme_classic() +
   theme(
@@ -227,14 +227,15 @@ year_causes_barplot <- $df_summary_year_causes_joined %>%
     legend.title = element_text(face = "bold", size = 12),
     legend.text = element_text(size = 12),
     legend.position = "top",
-    legend.direction = "vertical"
-  )
+    legend.direction = "horizontal"
+  ) +
+  guides(fill = guide_legend(nrow=1))
 
 ggsave(
   filename = "./_assets/figures/plots/year_causes_barplot.png", 
   plot = year_causes_barplot,
-  width = 11,
-  height = 10
+  width = 12,
+  height = 9
 )
 """
 
@@ -274,7 +275,7 @@ year_causes_percentage_barplot <- $df_summary_year_causes_joined %>%
     title = "Porcentaje de las causas de los varamientos",
     x = "Año",
     y = "Porcentaje",
-    fill = "Causa"
+    fill = "Causas:"
   ) +
   theme_classic() +
   theme(
@@ -287,14 +288,15 @@ year_causes_percentage_barplot <- $df_summary_year_causes_joined %>%
     legend.title = element_text(face = "bold", size = 12),
     legend.text = element_text(size = 12),
     legend.position = "top",
-    legend.direction = "vertical"
-  )
+    legend.direction = "horizontal"
+  ) +
+  guides(fill = guide_legend(nrow=1))
 
 ggsave(
   filename = "./_assets/figures/plots/year_causes_percentage_barplot.png", 
   plot = year_causes_percentage_barplot,
-  width = 11,
-  height = 10 
+  width = 12,
+  height = 9 
 )
 """
 
