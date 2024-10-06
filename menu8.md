@@ -18,3 +18,5 @@ tags = ["syntax", "code"]
 5. [Web interesante, artículo de tortugas marinas escrito por Marina Tortosa](https://biosean.com/es/tortugas-marinas-de-la-macaronesia)
 
 5. [Web Redpromar](https://redpromar.org/news/73)
+
+6. [Protocolo de actuación frente a varamientos de tortugas marinas en canarias](https://www.gobiernodecanarias.org/medioambiente/publicaciones/material-publicado/libros/varamiento-cetaceos-tortugas/index.html)
