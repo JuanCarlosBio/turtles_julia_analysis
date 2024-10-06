@@ -2,7 +2,7 @@
 
 #using Franklin
 #
-### Make sure that you are in the home directory of the repo
+### Asegúrate de que te encuentras en el directorio principal
 #
 ### 10-element Vector{String}:
 ###  ".git"
@@ -15,7 +15,13 @@
 ###  "images"
 ###  "metadata"
 ###  "tasks.jl"
+
+## Código para crear el sitio WEB
+## ========
 #
 #readdir()
 #
 #newsite("turtles_julia_analysis", template="hyde")
+
+## Si ya has creado el sitio web, para verlo puedes usar el comando
+# serve()
