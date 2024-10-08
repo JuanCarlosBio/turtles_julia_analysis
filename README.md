@@ -10,7 +10,7 @@ A partir de los resultados, crearé un <u><strong>artículo web</strong></u> exp
 
 ---
 
-### ¿Por qué queireo aprender julia?
+### ¿Por qué quiero aprender julia?
 
 * <u><strong>Rapidez</strong></u>: a diferencia de R y Python, presenta un JIT, lo que lo hace muy rápido.
 * <u><strong>Alto nivel</strong></u>: Fácil de leer debido y su sintaxis me parece bonita.
