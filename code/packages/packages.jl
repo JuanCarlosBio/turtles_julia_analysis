@@ -5,7 +5,9 @@ println("Download/Update Packages")
 ## Installing the Julia packages for the analysis
 packages = [
   "HTTP", 
-  "StringEncodings", 
+  "StringEncodings",
+  "TranscodingStreams",
+  "CodecZlib", 
   "CSV",
   "DataFrames",
   "DataFramesMeta",
