@@ -4,4 +4,5 @@ node_modules/
 package-lock.json
 
 data/
+!data/turtle_distribution_turtles.csv
 Rplots.pdf

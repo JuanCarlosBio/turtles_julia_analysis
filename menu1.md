@@ -1,5 +1,5 @@
 +++
-title = "Introducción"
+title = "Biología y elcología"
 hascode = true
 date = Date(2019, 3, 22)
 rss = "algo"
@@ -7,187 +7,160 @@ rss = "algo"
 tags = ["syntax", "code"]
 +++
 
-# **BIOLOGÍA/ECOLOGÍA DE LAS TORTUGAS MARINAS**
+# **TABLA DE CONTENIDO**
 
-Las tortugas marinas son un grupo antiguo de reptiles marinos de la familia **Cheloniidae**, a excepción de la tortuga laúd, presente en la familia **Dermochelyidae**, siendo su hábitat principal las aguas cálidas. Sus cuerpos están encerrados por una concha en forma de armadura, o caparazón, que está soldado con la columna vertebral. Se diferencian de las tortugas terrestres en que no pueden retraer la cabeza en el caparazón. Sus patas, en en particular las anteriores, están modificadas en forma de aletas para nadar.
+\toc
 
-Todas las tortugas marinas deben regresar a tierra para reproducirse. Migran durante largas distancias para poner sus huevos en playas arenosas, y lo han hecho así desde millones de años antes de que el ser humano apareciera. Las tortugas marinas todavía se reúnen para nidificar en las playas de la costa este de América Central, noreste de Australia, sudeste de Asia, Isla de Ascensión (en la mitad del Atlántico sur) y unas pocas localidades más.
+## **LAS TORTUGAS MARINAS**
 
-En total existen siete especies de tortugas marinas:.
+Las tortugas marinas son un grupo de reptiles marinos descendientes de un grupo antiguo de tortugas terrestres de costillas anchas y aplanadas que colonizaron el medio acuático, primero los ríos y lagos y posteriormente los océanos. Actualmente su hábitat principal son las aguas cálidas. 
+
+Las especies de tortugas marinas pertenecen a la familia **Cheloniidae**, a excepción de la tortuga laúd, de la familia **Dermochelyidae**. Sus cuerpos están encerrados por una concha en forma de armadura, o caparazón, que está soldado con la columna vertebral, sus patas, están modificadas en forma de aletas que les sirven como adaptació al medio acuático y carecen de dientes, en vez tienen un pico que les sirven para alimentarse de algas, plantas marinas, peces medusas y diversos invertebrados. Se diferencian de las tortugas terrestres en que no pueden retraer la cabeza en el caparazón. 
+
+Todas las tortugas marinas deben regresar a tierra para reproducirse. Migran durante largas distancias para poner sus huevos en playas arenosas, y lo han hecho así desde millones de años.
+
+### Especies de tortugas marinas avistadas en Canarias
+
+Son los únicos reptiles marinos encontrados de forma natural en las islas, Existen en total 7 especies de tortugas marinas, habiendose avistado en Canarias 6 de ellas: 
+
+* *Caretta caretta*, *Chelonia mydas*, *Eretmochelys imbricata*, *Lepidochelys olivacea*, *Lepidochelys kempii*, *Dermochelys coriacea*. 
 
 ~~~
 <div class="row">
   <div class="container">
     <img class="center" src="https://biosean.com/wp-content/uploads/2021/11/sea-turtless-768x602.png">
-    <p>
-    <i>Especies de tortugas marinas: imagen obtenida de <a href="https://biosean.com/es/tortugas-marinas-de-la-macaronesia">biosean.com</a>, en un artículo escrito por Marina Tortosa.
+    <figcaption style="font-size: 12px;" align="center">
+    <i><strong>Figura 1.  </strong>Especies de tortugas marinas: imagen obtenida de <a href="https://biosean.com/es/tortugas-marinas-de-la-macaronesia">biosean.com</a>, en un artículo escrito por Marina Tortosa.
 </i>
+    </figcaption>
+    <p>
     </p>
 </div>
 ~~~
 
-## **ESPECIES DE TORTUGAS MARINAS**
-
-### 1. Tortuga boba, *Caretta caretta* (Linnaeus,1758)
-
-~~~
-<div class="row">
-  <div class="container">
-    <figure>
-      <img class="left" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/loggerheadart-2.webp" width="300" height="225">
-      <figcaption><i>Imagen de tortuga boba obtenida de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
-    </figure>
-    <p>
-    La tortuga boba anida en tanto en playas arenosas insulares como continentales a lo largo de las regiones templadas y subtrópicos en todo el mundo. Como la mayoría de las tortugas, son grandes migradoras y usan un amplio rango de localidades y hábitats durante su ciclo de vida.
-    </p>
-    <p>
-    Presenta un tamaño mediano, con un caparazón que puede superar el metro de loingitud y los 200 Kg de peso. La tortuga boba presenta una cabeza grande con un pico queratinizado y cuello robusto, la coloración dorsal es de tonalidad marrón con bordes rojos o anaranjados mientras que su vientre es blanquecino con tonalidades de color gris oscuro. Las aletas delanteras y las extremidades posteriores tienen forma de timón con presencia de dos formaciones espinosas (púas o uñas)
-    </p>
-    <p>
-    Los ejemplares de esta especie obtienen la madurez alrededor de 10 - 39 años, en concreto <i>IUCN</i> considera que los 30 años de edad podría ser igual o mayor que el promedio de edad de madurez sexual. 
-    </p>
-    <div style="clear: both"></div>      
-  </div>
-</div>
-~~~
-
-### 2. Tortuga verde, *Chelonia mydas* (Linnaeus,1758)
-
-~~~
-<div class="row">
-  <div class="container">
-    <figure>
-      <img class="right" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/greenturtle-illustration-2.webp" width="300" height="250">
-      <figcaption><i>Imagen de tortuga verde obtenida de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
-    </figure>
-    <p>
-    Los ejemplares de tortuga verdes se encontraba hace tiempo en aguas costeras a lo largo de los trópicos. Sus caparazones pueden alcanzar hasta 1 m de longitud. Se alimentan principalmente de hierbas marinas y algas. Como todas las tortugas, la tortuga verde carecen de dientes, pero tienen potentes mandíbulas con pico muy afilado. 
-    </p>
-    <div style="clear: both"></div>      
-  </div>
-</div>
-~~~
-
-### 3. Tortuga carey, *Eretmochelys imbricatus* (Linnaeus,1766)
-
-~~~
-<div class="row">
-  <div class="container">
-    <figure>
-      <img class="left" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/hawksbillart-2.webp" width="300" height="250">
-      <figcaption><i>Imagen de tortuga carey de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
-    </figure>
-    <p>
-    Esta tortuga es más pequeña y su caparazón es marrón-rojizo con bandas amarillas. Utiliza su boca en forma de pico para comer animales incrustantes (como esponjas, ascidias y balanos), así como algas.
-    </p>
-    <div style="clear: both"></div>      
-  </div>
-</div>
-~~~
-
-### 4. Tortuga laúd, *Dermochelys coriacea* (Vandelli, 1761)
-
-~~~
-<div class="row">
-  <div class="container">
-    <figure>
-      <img class="right" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/leatherbackart-2.webp" width="300" height="250">
-      <figcaption><i>Imagen de tortuga laúd de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
-    </figure>
-    <p>
-    La tortuga laúd es la de mayor tamaño de las tortugas. Los individuos pueden alcanzar una longitud de 2 m y un peso de casi 540 kg. En lugar de un caparazón sólido, tienen una serie de pequeños huesos incrustados en la piel negra, formando crestas (o quillas) longitudinales patentes.
-    </p>
-    <p>
-    Los ejemplares de esta especie se encuentran en mar abierto, las que viven más alejadas de todos los reptiles marinos y raramente se ven excepto en las playas  donde anidan. Son grandes buceadoras (se ha observado un individuo de esta especie a 640 m de profundidad). Su dieta consta principalmente de medusas. Al igual que otras especies de tortugas marinas, se encuentra continuamente en peligro de extinción.
-    </p>
-    <div style="clear: both"></div>      
-  </div>
-</div>
-~~~
-
-### 5. Tortuga olivacea, *Lepidochelys olivacea* (Eschscholtz,1829)
-
-~~~
-<div class="row">
-  <div class="container">
-    <figure>
-      <img class="left" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/olive-ridley-2.webp" width="300" height="225">
-      <figcaption><i>Imagen de tortuga golfina de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
-    </figure>
-    <p>
-    La tortuga olivacea comparte las mismas características físicas y morfológicas que la tortuga carey, tortuga boba, y la tortuga verde, siendo esta la segunda más pequeña. El nombre de esta tortuga se debe al color de su caparsazón, el cual presenta un tono verde oliva. Actualmente es la especie más abundante de las tortugas marinas, sin embargo, se encuentran en estado de vulnerabilidad debido a que presenta un reducido número de sitios para anidar. 
-    </p>    
-    <p>     
-    El cambio climático afecta negativamente a esta tortuga, ya que causa el aumento de la temperatura de la arena, lo que provoca mayor número de ejemplares hembras que machos en la progenie, creando un desequilibrio en la naturaleza.
-    </p>
-    <div style="clear: both"></div>      
-  </div>
-</div>
-~~~
-
-### 6. Tortuga lora, *Lepidochelys kempii* (Garman, 1880)
-
-~~~
-<div class="row">
-  <div class="container">
-    <figure>
-      <img class="right" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/kempsridleyart-2.webp" width="300" height="225">
-      <figcaption><i>Imagen de tortuga lora de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
-    </figure>
-    <p>
-    La tortuga lora, es más extraña que el resto de las especies de tortugas marinas, además de ser la que mayor grado de amenaza presenta. A diferencia de las otras seis especies, la tortugal lora no es una gran migradora solo puede ser encontrada en el océano atlántico. Es una tortuga con dieta omnívora que se alimenta de medusas, moluscos, crustáceos, erizos de mar y algas. Los ejemplares de tortuga lora se consideran en estado crítico, la recolección de huevos y la caza furtiva fueron las principales causas de la disminución de su población. Sin embargo, a día de hot sus mayores amenazas incluyen la pérdida de su hábitat natural, contaminación y enredamientos con redes de pesca.
-    </p>
-    <div style="clear: both"></div>      
-  </div>
-</div>
-~~~
-
-### 7. Tortuga plana, *Natator depressus* (Garman, 1880)
-
-~~~
-<div class="row">
-  <div class="container">
-    <figure>
-      <img class="left" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/flatbackart-2.webp" width="300" height="225">
-      <figcaption><i>Imagen de tortuga plana de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
-    </figure>
-    <p>
-    La tortuga plana se trata de una especie endémica de Australia, endémica de las playas de arena y las aguas costeras poco profundas de la plataforma continental australiana. La tortuga plana recibe su nombre común porque su caparazón presenta es más plano que el de las otras tortugas. 
-    </p>
-    <p>
-    Esta especie es omnívora, sin embargo, su dieta es predominantemente carnívora. Se alimenta mayoritariamente de presas en aguas poco profundas donde nada. Se ha observado ejemplares de tortuga plana alimentándose de coral blando, pepinos de mar, gambas, medusas, moluscos y otro tipo de invertebrados. También pude alimentarse de algas ocasionalmente, siendo su alimentación herbívora un evento poco común. 
-    </p>
-    <p>    
-    En la web oficial de <i>IUCN</i> esta tortuga esta listada como "datos deficientes". Es de las que menos se encuentra amenazada de todas las tortugas marinas. Sin embargo, esta lista como vulnerable a nivel nacional en Australia, principalmente debido a amenazas relacionadas con su captura y pérdida de hábitats como el resto de especies.
-    </p>
-    <div style="clear: both"></div>      
-  </div>
-</div>
-~~~
-
-# **TORTUGAS MARINAS EN CANARIAS**
-
-De las siete especies de tortugas marinas, en canarias se han avistado/rescatado seis de ellas:
-
-- *Caretta caretta*
-- *Chelonia mydas*
-- *Eretmochelys imbricata*
-- *Lepidochelys olivacea*
-- *Lepidochelys kempii*
-- *Dermochelys coriacea*
-
-~~~<u><strong>La tortuga más común de las islas se trata de la tortuga boba</strong></u>~~~.
-
-Muchas de estas tortugas avistadas quedan varadas en las costas de las islas o son rescatadas flotando a la derviva en las inmediaciones debido al padecimeinto de lesiones o enfermedades. El principal destino de estas tortugas tras ser rescatadas son los Centros de Recuperación de Fauna Silvestre (CRFS) de los Cabildos Insulares de las islas. Los dos CRFS de Canarias son:
-
-* CRFS de Tafira, en la isla de Gran Canaria.
-
-* CRFS de La Tahonilla, en la isla de Tenerife.
-
-## **Especies de tortugas marinas varadas en Tenerife**
-
-En la base de datos de estudio, podemos encontrar las siguientes tortugas marinas: 
+Por otro lado, en la base de datos, se han avistado 4 de las especies, que es en las que centraremos este estudio:
 
 \tableinput{}{./tableinput/dunn_test_seasons.csv}
 
+### Centros de Recuperación de Fauna Silvestre (CRFS) en Canarias.
+
+
+Las tortugas marinas se ven amenazadas por la actividad humana, como la pesca, contaminación, destrucción de hábitat, tráfico marítimo, etc. Desde hace décadas se llevan a cabo programas de recuperación de tortugas varadas o que se encuentran flotando a la deriva en Canarias por lesiones o enfermedades. Estos programas implican el rescate de las tortugas, los tratamientos veterinarios necesarios, incluyendo en muchas ocasiones intervenciones quirúrgicas para la extracción de anzuelos, amputar aletas, cortar plásticos con los que extrangulan, etc.
+
+El principal destino de estas tortugas tras ser rescatadas son los CRFS de los Cabildos Insulares de las islas:
+
+* ~~~<u>CRFS de Tafira, en la isla de Gran Canaria</u>~~~.
+
+* ~~~<u><strong>CRFS de La Tahonilla, en la isla de Tenerife</strong></u>~~~.
+
+## **BIOLOGÍA Y ECOLOGÍA DE LAS TORTUGAS MARINAS EN CANARIAS**
+
+### Tortuga boba, *Caretta caretta* (Linnaeus,1758)
+
+~~~
+<div class="row">
+  <div class="container">
+    <figure>
+      <img class="left" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/loggerheadart-2.webp" width="300" height="150">
+      <figcaption style="font-size: 12px;" align="center"><i>Imagen de tortuga boba obtenida de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
+    </figure>
+    <p>
+    Es la tortuga más fácil de avistar en el Archipiélago Canario, recibiendo su nombre debido a que reposa en superficie, siendo fácilmente capturada. Al ser de sagre fría, aprovecha los rayos de sol para calentarse, lo cual expande los gases en su interior y ledificulta la inmersión durante unos pocos minutos.
+    </p>
+    <p>
+    La época de repre reproducción en el Atlántico oeste tiene lugar de mayo a septiembre. Anida en el sureste de Estados Unidos y en el Caribe. En el Atlántico Este, se reproduece en las islas de cabo Verde y, esporádicamente, en la costa de Senegal. La reproducción son en las mismas playas en las que han nacido.
+    </p>
+    <p>
+    La puesta se realiza en pequeños agujeros que excavan en las playas, llegando a depositar entre 80 a 130 huevos. El sexo de las tortugas depende de la temperatura media a la que se incube el huevo, cuando el superior a 29º C nacen hembra y temperaturas inferiores producen machos.
+    </p>
+    <p>
+    Al nacer se encuentran en un estado alto de vulnerabilidad, siendo presas de peses, aves, etc. Por ello presentan una baja probabilidad de llegar al estado adulto (aproximadamente 1/1000 individuos). A esto se tiene que sumarse a que presentan una baja tasa de reproducción, anida cada dos años aproximadamente, unas 4 o 7  veces por temporada, y entre cada nidada pasan de 12 a 17 días.
+    </p>
+    <p>
+    En Azores, Madeira y Canarias se observan principalmente <u><strong>ejemplares juveniles</strong></u>. Llegan a la madurez sexual a los 16-40 años y presentan una esperanza de vida entre 47 y 67 años, pudiendo llegar a una longitud máxima del caparazón de <u><strong>120 cm - 200 cm</strong></u> y los <u><strong>200 kg</strong></u>.
+    </p>
+    <p>
+    Es una especie con dieta principalmente carnívora durante toda su vida, pero varía con la edad. Se alimentan de moluscos, crustáceos, medusas y peces.
+    </p>
+    <p>
+    Se encuentran protegidas en el anexo IV (Gob Can), LESRPE (Gob Esp), BONN, siendo sus <u><strong>principales amenzas la pesca indiscriminada, navegación, destrucción del hátbitat y la contaminación</strong></u>. 
+    </p>
+    <div style="clear: both"></div>      
+  </div>
+</div>
+~~~
+
+### Tortuga verde, *Chelonia mydas* (Linnaeus,1758)
+
+~~~
+<div class="row">
+  <div class="container">
+    <figure>
+      <img class="right" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/greenturtle-illustration-2.webp" width="300" height="150">
+      <figcaption><i>Imagen de tortuga verde obtenida de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
+    </figure>
+    <p>
+    En las islas residen en su estado juvenil durante un tiempo indefinido (pocos años). Durante esa fase de juventud viven muy próximos a la costa, presentando una dieta vegetariana (seba y algas). Es una especie solitaria, aunque puee formar pequeñas agregaciones de menos de 10 individuos, entorno a sebadales y puertos.
+    </p>
+    <p>
+    Cuando se aproxima a la madurez sexual realiza migraciones de miles de kilómetros hasta sus zonas de reproducción (África, el Caribe y Brasil). 
+    </p>
+    <p>
+    Esta especie se encuentra ampliamente distribuida en aguas tropicales y subtropicales, cerca de las costas continentales y alrededor de las islas. Sin embargo, están ausentes en Madeira y Azores
+    </p>
+    <p>
+    La longitud máxima del caparazón de la tortuga verde es de unos 150 cm y puede llegar a pesar 230 kg.
+    </p>
+    <p>
+    Se encuentra protegida, catalogada en el Anexo IV (Gob Can), LESRPE (Gob Esp), BONN, siendo sus principales amenazas la pesca indiscriminada, la navegación, destrucción del hábitat y contaminación.
+    </p>
+    <div style="clear: both"></div>      
+  </div>
+</div>
+~~~
+
+### Tortuga carey, *Eretmochelys imbricatus* (Linnaeus,1766)
+
+~~~
+<div class="row">
+  <div class="container">
+    <figure>
+      <img class="left" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/hawksbillart-2.webp" width="300" height="150">
+      <figcaption><i>Imagen de tortuga carey de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
+    </figure>
+    <p>
+    De todas las tortugas es la que tiene una mayor distribución en los trópicos, muy relacionada con las zonas costeras y muy asociada a arrecifes de coral. Es muy rara encontrarla en canarias, de hecho, hay un único registro en la base de datos de este estudio.
+    </p>
+    <p>
+    Se trata de una especie que se encuentra también protegida, en el Anexo en el Anexo IV (Gob Can), LESRPE (Gob Esp), BONN, siendo sus principales amenazas la pesca indiscriminada, la navegación, destrucción del hábitat y contaminación.
+    </p> 
+    <div style="clear: both"></div>      
+  </div>
+</div>
+~~~
+
+### Tortuga laúd, *Dermochelys coriacea* (Vandelli, 1761)
+
+~~~
+<div class="row">
+  <div class="container">
+    <figure>
+      <img class="right" src="https://www.atlantis-bali-diving.com/wp-content/uploads/2022/10/leatherbackart-2.webp" width="300" height="150">
+      <figcaption><i>Imagen de tortuga laúd de <a href="https://www.atlantis-bali-diving.com/the-turtles-of-the-sea/">atlantis-bali-diving.com</a></i></figcaption>
+    </figure>
+    <p>
+    Es la especie de mayor tamaño, pudiendo su caparazón llegar a medir 200 cm, y pesar unos 916 Kg como máximo. Es una gran migradora, recorriendo enormes distancias. Se encuentra sobre todo en aguas profundas, se acercándose a las costas únicamente durante su periodo reproductor. Se alimenta de medusas, plancton gelatinoso, etc. En Canarias, se observa puntualmente en las aguas costeras y oceánicas próximas. 
+    </p>
+    <p>
+    Ocasionamente, se producen varamientos de animales heridos o enfermos, o bien ya fallecidos (como el ejemplar que podemos en contrar en la base de datos de estudio)
+    </p>
+    <p>    
+    Existen dos avistamientos de ejemplares de esta especie que salieron a tierra para luego volver al mar en Fuerteventura(Jandía y Ajuy).
+    </p>
+    <p>
+    Al igual que el resto de tortugas marinas,se encuentra protegida en el Anexo en el Anexo IV (Gob Can), LESRPE (Gob Esp), BONN, siendo sus principales amenazas la pesca indiscriminada, la navegación, destrucción del hábitat y contaminación. 
+    <div style="clear: both"></div>      
+  </div>
+</div>
+~~~
 
