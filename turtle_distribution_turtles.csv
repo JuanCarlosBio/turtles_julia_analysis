@@ -1,1 +1,29 @@
-code,isla,especie
+isla,especie,is_especie
+LANZAROTE,tortuga boba,AVISTADA
+FUERTEVENTURA,tortuga boba,AVISTADA
+GRAN CANARIA,tortuga boba,AVISTADA
+TENERIFE,tortuga boba,AVISTADA
+LA GOMERA,tortuga boba,AVISTADA
+LA PALMA,tortuga boba,AVISTADA
+EL HIERRO,tortuga boba,AVISTADA
+LANZAROTE,tortuga laúd,AVISTADA
+FUERTEVENTURA,tortuga laúd,AVISTADA
+GRAN CANARIA,tortuga laúd,AVISTADA
+TENERIFE,tortuga laúd,AVISTADA
+LA GOMERA,tortuga laúd,AVISTADA
+LA PALMA,tortuga laúd,AVISTADA
+EL HIERRO,tortuga laúd,AVISTADA
+LANZAROTE,tortuga carey,AVISTADA
+FUERTEVENTURA,tortuga carey,AVISTADA
+GRAN CANARIA,tortuga carey,AVISTADA
+TENERIFE,tortuga carey,AVISTADA
+LA GOMERA,tortuga carey,AVISTADA
+LA PALMA,tortuga carey,AVISTADA
+EL HIERRO,tortuga carey,AVISTADA
+LANZAROTE,tortuga verde,AVISTADA
+FUERTEVENTURA,tortuga verde,AVISTADA
+GRAN CANARIA,tortuga verde,AVISTADA
+TENERIFE,tortuga verde,AVISTADA
+LA GOMERA,tortuga verde,NO AVISTADA
+LA PALMA,tortuga verde,AVISTADA
+EL HIERRO,tortuga verde,AVISTADA
