@@ -29,7 +29,7 @@ Son los únicos reptiles marinos encontrados de forma natural en las islas, Exis
 <div class="row">
   <div class="container">
     <img class="center" src="https://biosean.com/wp-content/uploads/2021/11/sea-turtless-768x602.png">
-    <figcaption style="font-size: 12px;" align="center">
+    <figcaption; style="font-size: 12px;" align="center">
     <i><strong>Figura 1.  </strong>Especies de tortugas marinas: imagen obtenida de <a href="https://biosean.com/es/tortugas-marinas-de-la-macaronesia">biosean.com</a>, en un artículo escrito por Marina Tortosa.
 </i>
     </figcaption>
@@ -51,7 +51,24 @@ El principal destino de estas tortugas tras ser rescatadas son los CRFS de los C
 
 * ~~~<u>CRFS de Tafira, en la isla de Gran Canaria</u>~~~.
 
-* ~~~<u><strong>CRFS de La Tahonilla, en la isla de Tenerife</strong></u>~~~.
+* ~~~<u><strong>CRFS de La Tahonilla, en la isla de Tenerife</strong></u>~~~. Datos del centro:
+
+  * Dirección: Carretera General de La Esperanza, Kilómetro 0,4
+  * Coordenadas: Latitud = 28º 28' 36,21'' N ; Longitud = 16º 19' 14,51'' O
+  * 38291, La Laguna, Tenerife
+
+Estos centros atienden a varios grupos taxonómicos de animales, incluyendo a aves, ~~~<u><strong>tortugas marinas</strong></u>~~~, así como otros grupos de reptiles terrestres como lagartos endémicos y ocasionamente mamíferos, incluyendo marinos, como algunas especies de cetáceos.
+
+Para ello, la metodología para la observación y rescate de estas especies consiste en el muestreo realizado por reporte de cualquier animal herido o accidentado, detectado por los ciudadanos. Una vez los animales se encuentran en los centros, serán identificados, y diagnosticados por el veterinario del centro. 
+
+~~~
+  <p align="center">
+  <img src="/assets/figures/crfs_tahonilla1.jpg">
+    <figcaption; style="font-size: 12px;" align="center">
+    <i><strong>Figura 2.</strong> Emplazamiento de reahbilitación de tortugas marinas en La Tahonilla</i>
+    </figcaption>
+    </p>
+~~~
 
 ## **BIOLOGÍA Y ECOLOGÍA DE LAS TORTUGAS MARINAS EN CANARIAS**
 
