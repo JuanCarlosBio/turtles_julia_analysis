@@ -101,6 +101,7 @@ Para ello, la metodología para la observación y rescate de estas especies cons
     </p>
     <p>
     Se encuentran protegidas en el anexo IV (Gob Can), LESRPE (Gob Esp), BONN, siendo sus <u><strong>principales amenzas la pesca indiscriminada, navegación, destrucción del hátbitat y la contaminación</strong></u>. 
+    <img src="/assets/figures/distribution_tortuga boba.png">
     </p>
     <div style="clear: both"></div>      
   </div>
@@ -131,10 +132,12 @@ Para ello, la metodología para la observación y rescate de estas especies cons
     <p>
     Se encuentra protegida, catalogada en el Anexo IV (Gob Can), LESRPE (Gob Esp), BONN, siendo sus principales amenazas la pesca indiscriminada, la navegación, destrucción del hábitat y contaminación.
     </p>
+    <img src="/assets/figures/distribution_tortuga verde.png">
     <div style="clear: both"></div>      
   </div>
 </div>
 ~~~
+
 
 ### Tortuga carey, *Eretmochelys imbricatus* (Linnaeus,1766)
 
@@ -150,6 +153,7 @@ Para ello, la metodología para la observación y rescate de estas especies cons
     </p>
     <p>
     Se trata de una especie que se encuentra también protegida, en el Anexo en el Anexo IV (Gob Can), LESRPE (Gob Esp), BONN, siendo sus principales amenazas la pesca indiscriminada, la navegación, destrucción del hábitat y contaminación.
+    <img src="/assets/figures/distribution_tortuga carey.png">
     </p> 
     <div style="clear: both"></div>      
   </div>
@@ -176,6 +180,8 @@ Para ello, la metodología para la observación y rescate de estas especies cons
     </p>
     <p>
     Al igual que el resto de tortugas marinas,se encuentra protegida en el Anexo en el Anexo IV (Gob Can), LESRPE (Gob Esp), BONN, siendo sus principales amenazas la pesca indiscriminada, la navegación, destrucción del hábitat y contaminación. 
+    <img src="/assets/figures/distribution_tortuga laúd.png">
+    </p>
     <div style="clear: both"></div>      
   </div>
 </div>
