@@ -8,7 +8,10 @@ using
   Dates
 
 ## Transform the original CSV from ISO-8859-1, to UTF-8 
-function transform_encoding_csv(input_file::String, output_file::String, original_encoding::String, transformed_encoding::String)
+function transform_encoding_csv(input_file::String, 
+                                output_file::String, 
+                                original_encoding::String, 
+                                transformed_encoding::String)
 run(
     `
     iconv -f $original_encoding -t $transformed_encoding \
@@ -45,7 +48,10 @@ function main()
 
   if !isdir(out_dir) mkdir(out_dir) end
 
-  transform_encoding_csv(input_file, output_file, original_encoding, transformed_encoding)
+  transform_encoding_csv(input_file, 
+                         output_file, 
+                         original_encoding, 
+                         transformed_encoding)
 
   ## Reading the turtle data
   df_turtles = CSV.read(output_file, DataFrame, delim = ";")
