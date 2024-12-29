@@ -43,6 +43,6 @@ $df_species_turtles |>
     Porcentaje = paste(Porcentaje, "%")
   )
 """
-  )
+)
 
 CSV.write("./_assets/menu1/tableinput/dunn_test_seasons.csv", table_turtles)
