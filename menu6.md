@@ -9,13 +9,18 @@ tags = ["syntax", "code"]
 
 # **Condición de las tortugas al llegar a la tohnilla**
 
+La mayoría de las tortugas marinas que llegan a La Tahonilla llegan vivas al centro. Tras ello la mayoría son liberadas y pocas de ellas fallecen en el centro.
+
+Parece ser que ninguna de las tortugas se quedan como residentes en el centro de forma permanente en el centro, sino que todas son liberadas de nuevo al océano.
+
 ~~~
 <div class="row">
   <div class="container">
     <img class="left" src="/assets/figures/plots/turtle_condition.png">
-    <p>
-    Descripción del gráfico: El municipio donde más tortugas llegan es Adeje con unas 341 especies ... 
-    </p>
+    <figcaption; style="font-size: 12px;" align="center">
+      <strong><i>Figura 1.</i></strong><i> Registro de las tortugas marinas que llegan con vida o muertas al centro, y su evolución.</i>
+    </figcaption>
+    <div style="clear: both"></div>
     <div style="clear: both"></div>      
   </div>
 </div>

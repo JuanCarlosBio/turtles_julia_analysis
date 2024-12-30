@@ -15,7 +15,7 @@ sf_turtles_location %>%
   geom_sf_text(aes(label = n)) +
   scale_fill_gradient(low = "white", high = "red") +
   labs(
-    title = "Número de tortugas varadas según el municipio",
+    title = "Registro de tortugas marinas varadas por municipio",
     subtitle = "Tenerife, Islas Canarias",
     x = "Longitud",
     y = "Latitud",

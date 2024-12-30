@@ -11,13 +11,23 @@ tags = ["syntax", "code"]
 
 ## Varamientos según el municipios 
 
+En cuanto a la ubicación de las tortugas marianas ocurre una cosa interesante, la mayor parte de rescates ocurren en los muncipios de lla costa Nor-Oeste, Sur, Sur-Oeste, Sur-Este y Nor-Este. Sin embargo, los municipios de la zona Norte ocurren pocos registros de varamientos.
+
+Los munnicipios con más tortugas marinas varadas son:
+
+* Adeje (341)
+* Santa Cruz de Tenerife (91)
+* Arico (90)
+* Santiago del Teide (77)
+* Arona (67)
+
 ~~~
 <div class="row">
   <div class="container">
     <img class="left" src="/assets/figures/plots/mapa_calor.png">
-    <p>
-    Descripción del gráfico: El municipio donde más tortugas llegan es Adeje con unas 341 especies ... 
-    </p>
+    <figcaption; style="font-size: 12px;" align="center">
+      <strong><i>Figura 1.</i></strong><i>Mapa con los registros de tortugas marinas rescatadas tras ser varadas en las costas o flotando a la deriva.</i>
+    </figcaption>
     <div style="clear: both"></div>      
   </div>
 </div>
