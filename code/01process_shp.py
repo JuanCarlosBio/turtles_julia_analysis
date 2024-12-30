@@ -18,12 +18,36 @@ gc_municipality = canary_islands_municipality[
 
 gc_municipality.municipio = gc_municipality.municipio.str.lower()
 gc_municipality = gc_municipality[["municipio", "geometry"]]
-gc_municipality = gc_municipality.rename(columns={"municipio": "Municipality", "geometry": "geometry"})
+gc_municipality = (
+  gc_municipality
+    .rename(columns={
+      "municipio": "Municipality", 
+      "geometry": "geometry"
+    })
+  )
 
-df_turtles.Municipality = df_turtles.Municipality.str.lower()
-df_turtles_muni_summary = df_turtles.groupby(["Municipality"]).size().reset_index(name="n")
+df_turtles.Municipality = (
+  df_turtles
+    .Municipality
+    .str
+    .lower()
+  )
 
-merged_df = pd.merge(gc_municipality, df_turtles_muni_summary, on="Municipality", how="left")
+df_turtles_muni_summary = (
+  df_turtles
+    .groupby(["Municipality"])
+    .size()
+    .reset_index(name="n")
+  )
+
+merged_df = (
+  pd
+    .merge(gc_municipality, 
+           df_turtles_muni_summary, 
+           on="Municipality", 
+           how="left")
+  )
+
 ## To view in a map the results
 #import matplotlib.pyplot  as plt
 #merged_df.plot()
