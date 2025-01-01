@@ -30,7 +30,7 @@ Son los únicos reptiles marinos encontrados de forma natural en las islas, Exis
   <div class="container">
     <img class="center" src="https://biosean.com/wp-content/uploads/2021/11/sea-turtless-768x602.png">
     <figcaption; style="font-size: 12px;" align="center">
-    <i><strong>Figura 1.  </strong>Especies de tortugas marinas: imagen obtenida de <a href="https://biosean.com/es/tortugas-marinas-de-la-macaronesia">biosean.com</a>, en un artículo escrito por Marina Tortosa.
+    <i><strong>Figura 1.  </strong>Especies de tortugas marinas. Fuente: de Atlantis Bali Diving.
 </i>
     </figcaption>
     <p>

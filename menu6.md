@@ -11,7 +11,7 @@ tags = ["syntax", "code"]
 
 La mayoría de las tortugas marinas que llegan a La Tahonilla llegan vivas al centro. Tras ello la mayoría son liberadas y pocas de ellas fallecen en el centro.
 
-Parece ser que ninguna de las tortugas se quedan como residentes en el centro de forma permanente en el centro, sino que todas son liberadas de nuevo al océano.
+Parece ser que ninguna de las tortugas se quedan como residentes en el centro de forma permanente, sino que todas las que sobreviven al rescate son liberadas de nuevo al océano.
 
 ~~~
 <div class="row">
