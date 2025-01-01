@@ -41,7 +41,7 @@ df_summary_condition = combine(
     :release,
     :dead
   ]),
-  nrow => :n
+  nrow => :n,
 )
 
 ## Translate it to spanish
@@ -56,151 +56,104 @@ df_summary_condition = @chain df_summary_condition begin
   )
 end
 
+df_initial_condition = @chain combine(
+  groupby(df_summary_condition, :initial_condition),
+  :n .=> sum
+) begin
+  @mutate(
+    percentage = round((n_sum / sum(n_sum) * 100), digits = 2)
+  )
+end
+
+df_release = @chain combine(
+  groupby(df_summary_condition, :release),
+  :n .=> sum
+) begin
+  @mutate(
+    percentage = round((n_sum / sum(n_sum) * 100), digits = 2)
+  )
+end
+
+df_survival = @chain combine(
+  groupby(df_summary_condition, :dead),
+  :n .=> sum
+) begin
+  @mutate(
+    percentage = round((n_sum / sum(n_sum) * 100), digits = 2)
+  )
+end
+
+df_condition_final = DataFrame(
+  center = vcat(repeat(["Condición al llegar al CRFS"], 2), 
+                repeat(["Condición tras llegar al CRFS"], 4)),
+  condition = vcat(repeat(["Condición Inicial"], 2), 
+                   repeat(["Liberadas"], 2),
+                   repeat(["Supervivencia"], 2)),
+  groups   = vcat("Vivas", "Muertas", repeat(["Si", "No"], 2)),
+  values   = vcat(df_initial_condition.percentage[1], 
+                  df_initial_condition.percentage[2],
+                  df_release.percentage[2],
+                  df_release.percentage[1],
+                  df_survival.percentage[2],
+                  df_survival.percentage[1])
+  )
+
 R"""
-$df_summary_condition %>%
-  group_by(initial_condition) %>%
-  summarise(n = sum(n)) -> temp1
-
-max_initial_condition <- max(temp1$n)
-
-$df_summary_condition %>%
-  group_by(initial_condition) %>%
-  summarise(n = sum(n)) %>%
-  mutate(sum = sum(n)) %>%
-  ggplot(aes(initial_condition, n, fill = initial_condition)) +
-  geom_col(show.legend = FALSE, width = .25, color = "black") +
-  geom_text(
-    aes(label = n), 
-    position = "identity",
-    vjust = -.5) +
-  scale_y_continuous(
-    expand = expansion(0),
-    limits = c(0, max_initial_condition + max_initial_condition * .2)
-  ) +
-  scale_fill_manual(values = c("lightgray", "black")) +
-  labs(
-    title = "Condición de las tortugas",
-    x = NULL,
-    y = "Número de tortugas"
-  ) +
-  theme_classic() +
-  theme(
-    panel.grid = element_blank(),
-    panel.background = element_rect(fill = "white", color = "white"),
-    axis.line.x  = element_line(),
-    title = element_text(size = 11, face = "bold"),
-    plot.title = element_text(margin = margin(b = 1, unit = "lines"), hjust = .5),
-    axis.title.x = element_text(margin = margin(t = 10),size = 13),
-    axis.title.y = element_text(margin = margin(r = 10), size = 13),
-    axis.ticks.x = element_blank(),
-    axis.text = element_text(size = 10.5),
-    plot.caption =  element_text(hjust = 0, face = "italic")
-  ) -> plot_initial_condition
-"""
-
-R"""
-$df_summary_condition %>%
-  group_by(release) %>%
-  summarise(n = sum(n)) -> temp2
-
-max_release <- max(temp1$n)
-
-$df_summary_condition %>%
+$df_condition_final %>% 
   mutate(
-    release = factor(
-      release,
-      levels = c("SI", "NO"),
-      labels = c("Liberadas", "No liberadas")
+    condition = factor(
+      condition,
+        levels = c(
+          "Condición Inicial",
+          "Supervivencia",
+          "Liberadas"
+        ),
+        labels = c(
+          "<i>Condición inicial</i><br><span style='color: #ff7575'>Muertas</span> / <span style='color: #72ff8c'>Vivas</span>",
+          "<i>Supervivencia</i><br><span style='color: #ff7575'>No</span> / <span style='color: #72ff8c'>Si</span>",
+          "<i>Liberdas</i><br><span style='color: #ff7575'>No</span> / <span style='color: #72ff8c'>Si</span>"
+        )
+      ),
+    groups = factor(
+      groups,
+        levels = c(
+          "Vivas",
+          "Muertas",
+          "Si",
+          "No"
+      )
     )
   ) %>%
-  group_by(release) %>%
-  summarise(n = sum(n)) %>%
-  ggplot(aes(release, n, fill = release)) +
-  geom_col(show.legend = FALSE, width = .25, color = "black") +
-  geom_text(
-    aes(label = n), 
-    position = "identity",
-    vjust = -.5) +
-  scale_y_continuous(
-    expand = expansion(0),
-    limits = c(0, max_release + max_release * .2)
-  ) +
-  scale_fill_manual(values = c("lightgray", "black")) +
+  ggplot(aes(values, reorder(condition, values))) +
+  geom_col(aes(fill = groups),
+           position = "stack",
+           show.legend = FALSE,
+           width = .5) +
+  geom_text(aes(label = paste0(values, "%")), hjust = 1) +
+  facet_wrap(~center, ncol = 1, scales = "free") +
+  scale_fill_manual(values = c("#72ff8c", "#ff7575", "#72ff8c", "#ff7575")) +
   labs(
-    title = "Tortugas liberadas/No liberadas",
-    x = NULL,
-    y = "Número de tortugas"
+    title = "Condición de las tortugas al llegar y estancia en el centro",
+    y = NULL
   ) +
-  theme_classic() +
   theme(
-    panel.grid = element_blank(),
-    panel.background = element_rect(fill = "white", color = "white"),
-    axis.line.x  = element_line(),
-    title = element_text(size = 11, face = "bold"),
-    plot.title = element_text(margin = margin(b = 1, unit = "lines"), hjust = .5),
-    axis.title.x = element_text(margin = margin(t = 10),size = 13),
-    axis.title.y = element_text(margin = margin(r = 10), size = 13),
-    axis.ticks.x = element_blank(),
-    axis.text = element_text(size = 10.5),
-    plot.caption =  element_text(hjust = 0, face = "italic")
-  ) -> plot_release
-"""
-
-R"""
-$df_summary_condition %>%
-  group_by(dead) %>%
-  summarise(n = sum(n)) -> temp3
-
-max_dead <- max(temp1$n)
-
-$df_summary_condition %>%
-  group_by(dead) %>%
-  summarise(n = sum(n)) %>%
-  mutate(dead = factor(
-    dead,
-    levels = c("SI", "NO")
-  )) %>%
-  ggplot(aes(dead, n, fill = dead)) +
-  geom_col(show.legend = FALSE, width = .25, color = "black") +
-  geom_text(
-    aes(label = n), 
-    position = "identity",
-    vjust = -.5) +
-  scale_y_continuous(
-    expand = expansion(0),
-    limits = c(0, max_dead + max_dead * .2)
-  ) +
-  scale_fill_manual(values = c("lightgray", "black")) +
-  labs(
-    title = "Tortugas Vivas/Muertas",
-    x = NULL,
-    y = "Número de tortugas"
-  ) +
-  theme_classic() +
-  theme(
-    panel.grid = element_blank(),
-    panel.background = element_rect(fill = "white", color = "white"),
-    axis.line.x  = element_line(),
-    title = element_text(size = 11, face = "bold"),
-    plot.title = element_text(margin = margin(b = 1, unit = "lines"), hjust = .5),
-    axis.title.x = element_text(margin = margin(t = 10),size = 13),
-    axis.title.y = element_text(margin = margin(r = 10), size = 13),
-    axis.ticks.x = element_blank(),
-    axis.text = element_text(size = 10.5),
-    plot.caption =  element_text(hjust = 0, face = "italic")
-  ) -> plot_dead 
-"""
-
-R"""
-all_plots <- plot_grid(
-  plot_initial_condition, plot_release, plot_dead
-)
+    plot.background = element_rect(color = "white", fill = "white"),
+    panel.background = element_rect(color = "white", fill = "white"),
+    plot.title = element_text(face = "bold", size = 16, hjust = 1),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_markdown(face = "bold", size = 14, hjust = 0, color = "black"),
+    strip.text = element_text(face = "bold.italic", size = 12, color = "#404040"),
+    strip.background = element_blank()
+  )
 
 ggsave(
   filename = "./_assets/figures/plots/turtle_condition.png", 
-  plot = all_plots,
+  plot = last_plot(),
   width = 8,
-  height = 6
+  height = 4 
 )
 """
 

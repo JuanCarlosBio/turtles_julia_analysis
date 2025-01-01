@@ -137,11 +137,16 @@ df_tortugas_obs <- $df_turtles %>% mutate(
 R"""
 df_turtles_observationsR <- $df_turtles_observations
 
-df_injury.body <- expand.grid(injury=as.character(unique(as.character(df_turtles_observationsR$injury))),
-                             body=as.character(unique(as.character(df_turtles_observationsR$body)))) %>% left_join(
-                               df_turtles_observationsR %>% group_by(injury,body) %>% summarize(n=n()),
-                               by=c("injury","body")
-                             ) %>% mutate(n=ifelse(is.na(n),0,n)) 
+df_injury.body <- expand.grid(
+  injury=as.character(unique(as.character(df_turtles_observationsR$injury))),
+  body=as.character(unique(as.character(df_turtles_observationsR$body)))
+) %>% left_join(
+  df_turtles_observationsR %>% 
+    group_by(injury,body) %>% 
+    summarize(n=n()), 
+  by=c("injury","body")
+) %>% 
+  mutate(n=ifelse(is.na(n),0,n)) 
 
 injury.body_plot <- df_injury.body %>%
   filter(!(injury %in% NA) &  !(body %in% NA)) %>% 
@@ -168,11 +173,16 @@ ggsave(
 R"""
 df_turtles_observationsR <- $df_turtles_observations
 
-df_state.body <- expand.grid(state=as.character(unique(as.character(df_turtles_observationsR$state))),
-                             body=as.character(unique(as.character(df_turtles_observationsR$body)))) %>% left_join(
-                               df_turtles_observationsR %>% group_by(state, body) %>% summarize(n=n()),
-                               by=c("state","body")
-                             ) %>% mutate(n=ifelse(is.na(n),0,n)) 
+df_state.body <- expand.grid(
+  state=as.character(unique(as.character(df_turtles_observationsR$state))),
+  body=as.character(unique(as.character(df_turtles_observationsR$body)))
+) %>% left_join(
+  df_turtles_observationsR %>% 
+    group_by(state, body) %>% 
+    summarize(n=n()),
+  by=c("state","body")
+) %>% 
+  mutate(n=ifelse(is.na(n),0,n)) 
 
 state.body_plot <- df_state.body %>%
   filter(!(state %in% NA) &  !(body %in% NA)) %>% 
@@ -198,11 +208,16 @@ ggsave(
 R"""
 df_turtles_observationsR <- $df_turtles_observations
 
-df_state.injury <- expand.grid(state=as.character(unique(as.character(df_turtles_observationsR$state))),
-                               injury=as.character(unique(as.character(df_turtles_observationsR$injury)))) %>% left_join(
-                               df_turtles_observationsR %>% group_by(state, injury) %>% summarize(n=n()),
-                               by=c("state","injury")
-                             ) %>% mutate(n=ifelse(is.na(n),0,n)) 
+df_state.injury <- expand.grid(
+  state=as.character(unique(as.character(df_turtles_observationsR$state))),
+  injury=as.character(unique(as.character(df_turtles_observationsR$injury)))
+) %>% left_join(
+  df_turtles_observationsR %>% 
+    group_by(state, injury) %>% 
+    summarize(n=n()),
+  by=c("state","injury")
+) %>% 
+  mutate(n=ifelse(is.na(n),0,n)) 
 
 state.injury_plot <- df_state.injury %>%
   filter(!(state %in% NA) &  !(injury %in% NA)) %>% 
